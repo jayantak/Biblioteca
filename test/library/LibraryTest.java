@@ -10,8 +10,15 @@ public class LibraryTest {
 
     @Test
     public void shouldShowListOfBooks() throws FileNotFoundException {
-        Library library = new Library();
-        assertEquals("Harry Potter\nAlan Wake", library.bookList());
 
+        BookList books = new BookList();
+
+        Book book = new Book("Book Name", "Author Name", 1999);
+        Book anotherBook= new Book("Another", "Author Name", 1999);
+        books.add(book);
+        books.add(anotherBook);
+        Library library = Library.createLibrary(books);
+
+        assertEquals(books, library.bookList());
     }
 }

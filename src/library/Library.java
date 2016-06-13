@@ -1,15 +1,47 @@
 package library;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 
+//Understands lending of books
 public class Library {
 
-    public String bookList() throws FileNotFoundException {
-        String pathname = System.getProperty("user.dir") + "/exampleData" + "/libraryInventory.books";
-        File file = new File(pathname);
-        Scanner scanner = new Scanner(file).useDelimiter("\\Z");
-        return scanner.next();
+    private BookList inventory;
+
+    private Library() {
+        inventory = new BookList();
+    }
+
+    public static Library createLibrary(String libraryName) throws FileNotFoundException {
+        Library library = new Library();
+        library.inventory.populateFrom(libraryName);
+        return library;
+    }
+
+    public static Library createLibrary(BookList bookList)  {
+        Library library = new Library();
+        library.inventory = bookList;
+        return library;
+    }
+
+    public BookList bookList() throws FileNotFoundException {
+        return inventory;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Library library = (Library) o;
+
+        return inventory != null ? inventory.equals(library.inventory) : library.inventory == null;
+
+    }
+
+    @Override
+    public String toString() {
+        return "Library{" +
+                "inventory=" + inventory +
+                '}';
     }
 }
