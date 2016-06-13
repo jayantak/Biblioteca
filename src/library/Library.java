@@ -7,24 +7,20 @@ public class Library {
 
     private BookList inventory;
 
-    private Library() {
-        inventory = new BookList();
+    public Library(BookList bookList) {
+        inventory = bookList;
     }
 
-    public static Library createLibrary(String libraryName) throws FileNotFoundException {
-        Library library = new Library();
-        library.inventory.populateFrom(libraryName);
-        return library;
-    }
-
-    public static Library createLibrary(BookList bookList)  {
-        Library library = new Library();
-        library.inventory = bookList;
-        return library;
+    public Library() {
+        this(new BookList());
     }
 
     public BookList bookList() throws FileNotFoundException {
         return inventory;
+    }
+
+    public String welcomeMessage() {
+        return "Welcome to Biblioteca!";
     }
 
     @Override

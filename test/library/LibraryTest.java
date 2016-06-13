@@ -17,8 +17,14 @@ public class LibraryTest {
         Book anotherBook= new Book("Another", "Author Name", 1999);
         books.add(book);
         books.add(anotherBook);
-        Library library = Library.createLibrary(books);
+        Library library = new Library(books);
 
         assertEquals(books, library.bookList());
+    }
+
+    @Test
+    public void welcomeMessage() {
+        Library library = new Library();
+        assertEquals("Welcome to Biblioteca!", library.welcomeMessage());
     }
 }

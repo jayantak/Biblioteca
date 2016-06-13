@@ -1,6 +1,6 @@
 package library;
 
-//Understands a single book
+//Understands the properties of a written novel
 class Book {
 
     final String name;
@@ -11,11 +11,6 @@ class Book {
         this.name = name;
         this.author = author;
         this.yearPublished = yearPublished;
-    }
-
-    static Book createBook(String bookData) {
-        String[] metaData = bookData.split(",");
-        return new Book(metaData[0], metaData[1], Integer.parseInt(metaData[2]));
     }
 
     String display() {

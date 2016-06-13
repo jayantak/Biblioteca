@@ -14,11 +14,4 @@ public class BookList extends ArrayList<Book> {
         }
         return printedSolution;
     }
-
-    void populateFrom(String path) throws FileNotFoundException {
-        BookListInput bookListInput = new BookListInput(path);
-        bookListInput.populateFrom(this);
-    }
-
-
 }

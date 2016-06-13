@@ -1,20 +1,16 @@
-import library.BookList;
-import library.Library;
+import library.*;
 
 import java.io.FileNotFoundException;
 
 public class Biblioteca {
 
     public static void main(String[] args) throws FileNotFoundException {
-        System.out.println(welcomeMessage());
+        LibraryDataInput libraryDataInput = new TextFileDataInput("exampleLibrary");
+        Library library = new Library(libraryDataInput.getBookList());
+        LibraryIO libraryIO = new ConsoleIO(library);
 
-        Library library = Library.createLibrary("exampleLibrary");
-        System.out.println("\nAvailable books : ");
-        BookList bookList = library.bookList();
-        System.out.println(bookList.print());
-    }
+        libraryIO.welcomeMessage();
 
-    static String welcomeMessage() {
-        return "Welcome to Biblioteca!";
+        libraryIO.printBookList();
     }
 }

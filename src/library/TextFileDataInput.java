@@ -2,23 +2,25 @@ package library;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.Serializable;
 import java.util.Scanner;
 
-public class BookListInput {
+//Understands input of books from file
+public class TextFileDataInput implements LibraryDataInput {
 
     String path;
 
-    public BookListInput(String path) {
+    public TextFileDataInput(String path) {
         this.path = path;
     }
 
-    public void populateFrom(BookList bookList) throws FileNotFoundException {
+    public BookList getBookList() throws FileNotFoundException {
+        BookList bookList = new BookList();
         String bookListString = getBookListString();
         String[] bookListData = bookListString.split("\n");
         for (String bookData : bookListData) {
-            bookList.add(Book.createBook(bookData));
+            bookList.add(createBook(bookData));
         }
+        return bookList;
     }
 
     private String getBookListString() throws FileNotFoundException {
@@ -26,5 +28,10 @@ public class BookListInput {
         File file = new File(pathname);
         Scanner scanner = new Scanner(file).useDelimiter("\\Z");
         return scanner.next();
+    }
+
+    Book createBook(String bookData) {
+        String[] metaData = bookData.split(",");
+        return new Book(metaData[0], metaData[1], Integer.parseInt(metaData[2]));
     }
 }
