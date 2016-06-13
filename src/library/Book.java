@@ -14,7 +14,7 @@ class Book {
     }
 
     String display() {
-        return name + "\t" + author + "\t" + Integer.toString(yearPublished);
+        return String.format("%30s %30s %15s", name , author , Integer.toString(yearPublished));
     }
 
     @Override

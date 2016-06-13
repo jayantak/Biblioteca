@@ -10,7 +10,9 @@ public class Biblioteca {
         LibraryIO libraryIO = new ConsoleIO(library);
 
         libraryIO.welcomeMessage();
-
-        libraryIO.printBookList();
+        boolean exit = false;
+        while(!exit){
+            exit = libraryIO.mainMenu();
+        }
     }
 }
