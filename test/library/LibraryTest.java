@@ -3,6 +3,8 @@ package library;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.*;
@@ -37,9 +39,10 @@ public class LibraryTest {
         ConsoleIO consoleIO = mock(ConsoleIO.class);
         BookList bookList = new BookList();
         Library library = new Library(bookList, consoleIO);
-        when(consoleIO.mainMenu()).thenReturn(0);
+        List<String> menuItems = Arrays.asList("Exit", "List Books");
+        when(consoleIO.mainMenu(menuItems)).thenReturn(0);
         library.enter();
-        verify(consoleIO).mainMenu();
+        verify(consoleIO).mainMenu(menuItems);
     }
 
     @Test
@@ -47,7 +50,8 @@ public class LibraryTest {
         ConsoleIO consoleIO = mock(ConsoleIO.class);
         BookList bookList = new BookList();
         Library library = new Library(bookList, consoleIO);
-        when(consoleIO.mainMenu()).thenReturn(1).thenReturn(0);
+        List<String> menuItems = Arrays.asList("Exit", "List Books");
+        when(consoleIO.mainMenu(menuItems)).thenReturn(1).thenReturn(0);
         library.enter();
         verify(consoleIO).printBookList(bookList, "%30s %30s %30s\n");
     }
@@ -57,8 +61,11 @@ public class LibraryTest {
         ConsoleIO consoleIO = mock(ConsoleIO.class);
         BookList bookList = new BookList();
         Library library = new Library(bookList, consoleIO);
-        when(consoleIO.mainMenu()).thenReturn(-1).thenReturn(0);
+        List<String> menuItems = Arrays.asList("Exit", "List Books");
+        when(consoleIO.mainMenu(menuItems)).thenReturn(-1).thenReturn(0);
         library.enter();
         verify(consoleIO).invalidOption();
     }
+
+
 }

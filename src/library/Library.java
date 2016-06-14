@@ -1,5 +1,8 @@
 package library;
 
+import java.util.Arrays;
+import java.util.List;
+
 //Understands lending of books
 public class Library {
 
@@ -19,10 +22,11 @@ public class Library {
         return inventory;
     }
 
-    public void mainMenu() {
+    private void mainMenu() {
         boolean restart = true;
+        List<String> menuItems = Arrays.asList("Exit", "List Books");
         while (restart) {
-            int choice = libraryIO.mainMenu();
+            int choice = libraryIO.mainMenu(menuItems);
             restart = execute(choice);
         }
     }
@@ -32,7 +36,7 @@ public class Library {
             libraryIO.printBookList(inventory, "%30s %30s %30s\n");
             return true;
         }
-        if(choice == 0) {
+        if (choice == 0) {
             return false;
         }
         libraryIO.invalidOption();

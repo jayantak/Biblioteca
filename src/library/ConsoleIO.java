@@ -1,5 +1,6 @@
 package library;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleIO implements LibraryIO {
@@ -19,11 +20,13 @@ public class ConsoleIO implements LibraryIO {
     }
 
     @Override
-    public int mainMenu() {
+    public int mainMenu(List<String> menuItems) {
         System.out.println("" +
-                "Choose option: \n" +
-                "0. Exit\n" +
-                "1. List Books");
+                "Choose option: ");
+        int i = 0;
+        for (String item : menuItems) {
+            System.out.println("\n" + i++ + item);
+        }
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
