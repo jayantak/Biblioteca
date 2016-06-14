@@ -5,9 +5,7 @@ import org.junit.Test;
 import java.io.FileNotFoundException;
 
 import static junit.framework.TestCase.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class LibraryTest {
 
@@ -30,8 +28,8 @@ public class LibraryTest {
         ConsoleIO consoleIO = mock(ConsoleIO.class);
         BookList bookList = new BookList();
         Library library = new Library(bookList, consoleIO);
-        library.welcomeMessage();
-        verify(consoleIO).welcomeMessage("Welcome to Biblioteca!");
+        library.enter();
+        verify(consoleIO).display("Welcome to Biblioteca!");
     }
 
     @Test
@@ -39,7 +37,8 @@ public class LibraryTest {
         ConsoleIO consoleIO = mock(ConsoleIO.class);
         BookList bookList = new BookList();
         Library library = new Library(bookList, consoleIO);
-        library.mainMenu();
+        when(consoleIO.mainMenu()).thenReturn(0);
+        library.enter();
         verify(consoleIO).mainMenu();
     }
 
@@ -48,8 +47,8 @@ public class LibraryTest {
         ConsoleIO consoleIO = mock(ConsoleIO.class);
         BookList bookList = new BookList();
         Library library = new Library(bookList, consoleIO);
-        when(consoleIO.mainMenu()).thenReturn(1);
-        library.mainMenu();
+        when(consoleIO.mainMenu()).thenReturn(1).thenReturn(0);
+        library.enter();
         verify(consoleIO).printBookList(bookList, "%30s %30s %30s\n");
     }
 
@@ -58,8 +57,8 @@ public class LibraryTest {
         ConsoleIO consoleIO = mock(ConsoleIO.class);
         BookList bookList = new BookList();
         Library library = new Library(bookList, consoleIO);
-        when(consoleIO.mainMenu()).thenReturn(0);
-        library.mainMenu();
+        when(consoleIO.mainMenu()).thenReturn(-1).thenReturn(0);
+        library.enter();
         verify(consoleIO).invalidOption();
     }
 }

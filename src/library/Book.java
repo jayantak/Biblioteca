@@ -3,9 +3,9 @@ package library;
 //Understands the properties of a written novel
 class Book {
 
-    final String name;
-    final String author;
-    final int yearPublished;
+    private final String name;
+    private final String author;
+    private final int yearPublished;
 
     Book(String name, String author, int yearPublished) {
         this.name = name;

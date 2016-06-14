@@ -1,7 +1,5 @@
 package library;
 
-import java.io.FileNotFoundException;
-
 //Understands lending of books
 public class Library {
 
@@ -17,23 +15,25 @@ public class Library {
         this(bookList, new ConsoleIO());
     }
 
-    BookList bookList() throws FileNotFoundException {
+    BookList bookList() {
         return inventory;
     }
 
-    public void welcomeMessage() {
-        libraryIO.welcomeMessage("Welcome to Biblioteca!");
+    public void mainMenu() {
+        boolean restart = true;
+        while (restart) {
+            int choice = libraryIO.mainMenu();
+            restart = execute(choice);
+        }
     }
 
-    public boolean mainMenu() throws FileNotFoundException {
-        int choice = libraryIO.mainMenu();
-        return execute(choice);
-    }
-
-    boolean execute(int choice) throws FileNotFoundException {
+    private boolean execute(int choice) {
         if (choice == 1) {
             libraryIO.printBookList(inventory, "%30s %30s %30s\n");
             return true;
+        }
+        if(choice == 0) {
+            return false;
         }
         libraryIO.invalidOption();
         return true;
@@ -55,5 +55,10 @@ public class Library {
         return "Library{" +
                 "inventory=" + inventory +
                 '}';
+    }
+
+    public void enter() {
+        libraryIO.display("Welcome to Biblioteca!");
+        mainMenu();
     }
 }
