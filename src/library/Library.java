@@ -21,10 +21,6 @@ public class Library {
         return inventory;
     }
 
-    private void printBookList(String format) throws FileNotFoundException {
-        libraryIO.printBookList(inventory, format);
-    }
-
     public void welcomeMessage() {
         libraryIO.welcomeMessage("Welcome to Biblioteca!");
     }
