@@ -6,21 +6,41 @@ import java.io.FileNotFoundException;
 public class Library {
 
     private BookList inventory;
+    private LibraryIO libraryIO;
 
-    public Library(BookList bookList) {
-        inventory = bookList;
+    public Library(BookList inventory, LibraryIO libraryIO) {
+        this.inventory = inventory;
+        this.libraryIO = libraryIO;
     }
 
-    public Library() {
-        this(new BookList());
+    Library(BookList bookList) {
+        this(bookList, new ConsoleIO());
     }
 
-    public BookList bookList() throws FileNotFoundException {
+    BookList bookList() throws FileNotFoundException {
         return inventory;
     }
 
-    public String welcomeMessage() {
-        return "Welcome to Biblioteca!";
+    private void printBookList(String format) throws FileNotFoundException {
+        libraryIO.printBookList(inventory, format);
+    }
+
+    public void welcomeMessage() {
+        libraryIO.welcomeMessage("Welcome to Biblioteca!");
+    }
+
+    public boolean mainMenu() throws FileNotFoundException {
+        int choice = libraryIO.mainMenu();
+        return execute(choice);
+    }
+
+    boolean execute(int choice) throws FileNotFoundException {
+        if (choice == 1) {
+            libraryIO.printBookList(inventory, "%30s %30s %30s\n");
+            return true;
+        }
+        libraryIO.invalidOption();
+        return true;
     }
 
     @Override

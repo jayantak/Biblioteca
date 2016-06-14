@@ -5,35 +5,32 @@ import java.util.Scanner;
 
 public class ConsoleIO implements LibraryIO {
 
-    Library library;
-
-    public ConsoleIO(Library library) {
-        this.library = library;
+    @Override
+    public void welcomeMessage(String welcomeMessage) {
+        System.out.println(welcomeMessage);
     }
 
     @Override
-    public void welcomeMessage() {
-        System.out.println(library.welcomeMessage());
-    }
-
-    @Override
-    public void printBookList() throws FileNotFoundException {
+    public void printBookList(BookList bookList, String format) throws FileNotFoundException {
         System.out.println("\nAvailable books : ");
-        System.out.println(library.bookList().print());
+        System.out.println(String.format(format, "Book Name", "Author", "Year of Publication"));
+        for (Book book : bookList) {
+            System.out.println(book.toString("%30s %30s %30s\n"));
+        }
     }
 
     @Override
-    public boolean mainMenu() throws FileNotFoundException {
+    public int mainMenu() throws FileNotFoundException {
         System.out.println("" +
                 "Choose option: \n" +
                 "1. List Books\n" +
                 "2. Exit");
         Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
-        if(choice == 1) {
-            printBookList();
-            return false;
-        }
-        return true;
+        return scanner.nextInt();
+    }
+
+    @Override
+    public void invalidOption() {
+        System.out.println("Select a valid option!");
     }
 }

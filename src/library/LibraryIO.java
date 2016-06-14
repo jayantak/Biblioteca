@@ -4,9 +4,11 @@ import java.io.FileNotFoundException;
 
 public interface LibraryIO {
 
-    void welcomeMessage();
+    void welcomeMessage(String s);
 
-    void printBookList() throws FileNotFoundException;
+    void printBookList(BookList bookList, String format) throws FileNotFoundException;
 
-    boolean mainMenu() throws FileNotFoundException;
+    int mainMenu() throws FileNotFoundException;
+
+    void invalidOption();
 }

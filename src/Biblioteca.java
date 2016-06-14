@@ -6,13 +6,13 @@ public class Biblioteca {
 
     public static void main(String[] args) throws FileNotFoundException {
         LibraryDataInput libraryDataInput = new TextFileDataInput("exampleLibrary");
-        Library library = new Library(libraryDataInput.getBookList());
-        LibraryIO libraryIO = new ConsoleIO(library);
+        LibraryIO libraryIO = new ConsoleIO();
+        Library library = new Library(libraryDataInput.getBookList(), libraryIO);
 
-        libraryIO.welcomeMessage();
+        library.welcomeMessage();
         boolean exit = false;
-        while(!exit){
-            exit = libraryIO.mainMenu();
+        while (!exit) {
+            exit = library.mainMenu();
         }
     }
 }

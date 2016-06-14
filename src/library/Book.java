@@ -13,8 +13,8 @@ class Book {
         this.yearPublished = yearPublished;
     }
 
-    String display() {
-        return String.format("%30s %30s %15s", name , author , Integer.toString(yearPublished));
+    String toString(String format) {
+        return String.format(format, name, author, Integer.toString(yearPublished));
     }
 
     @Override
