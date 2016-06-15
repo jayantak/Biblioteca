@@ -2,7 +2,6 @@ package library;
 
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,7 +11,7 @@ import static org.mockito.Mockito.*;
 public class LibraryTest {
 
     @Test
-    public void shouldShowListOfBooks() throws FileNotFoundException {
+    public void shouldShowListOfBooks() {
 
         BookList books = new BookList();
 
@@ -28,16 +27,16 @@ public class LibraryTest {
     @Test
     public void welcomeMessage() {
         ConsoleIO consoleIO = mock(ConsoleIO.class);
-        BookList bookList = new BookList();
+        BookList bookList = mock(BookList.class);
         Library library = new Library(bookList, consoleIO);
         library.enter();
         verify(consoleIO).display("Welcome to Biblioteca!");
     }
 
     @Test
-    public void mainMenuShouldPrintMenu() throws FileNotFoundException {
+    public void mainMenuShouldPrintMenu() {
         ConsoleIO consoleIO = mock(ConsoleIO.class);
-        BookList bookList = new BookList();
+        BookList bookList = mock(BookList.class);
         Library library = new Library(bookList, consoleIO);
         List<String> menuItems = Arrays.asList("Exit", "List Books", "Checkout Book");
         when(consoleIO.mainMenu(menuItems)).thenReturn(0);
@@ -46,9 +45,9 @@ public class LibraryTest {
     }
 
     @Test
-    public void executingOption1ShouldPrintListOfBooks() throws FileNotFoundException {
+    public void executingOption1ShouldPrintListOfBooks() {
         ConsoleIO consoleIO = mock(ConsoleIO.class);
-        BookList bookList = new BookList();
+        BookList bookList = mock(BookList.class);
         Library library = new Library(bookList, consoleIO);
         List<String> menuItems = Arrays.asList("Exit", "List Books", "Checkout Book");
         when(consoleIO.mainMenu(menuItems)).thenReturn(1).thenReturn(0);
@@ -57,9 +56,9 @@ public class LibraryTest {
     }
 
     @Test
-    public void executingOption0ShouldShowInvalidOption() throws FileNotFoundException {
+    public void executingOption0ShouldShowInvalidOption() {
         ConsoleIO consoleIO = mock(ConsoleIO.class);
-        BookList bookList = new BookList();
+        BookList bookList = mock(BookList.class);
         Library library = new Library(bookList, consoleIO);
         List<String> menuItems = Arrays.asList("Exit", "List Books", "Checkout Book");
         when(consoleIO.mainMenu(menuItems)).thenReturn(-1).thenReturn(0);
@@ -67,5 +66,41 @@ public class LibraryTest {
         verify(consoleIO).invalidOption();
     }
 
+    @Test
+    public void executingOption2ShouldCheckoutBook() {
+        ConsoleIO consoleIO = mock(ConsoleIO.class);
+        BookList bookList = mock(BookList.class);
+        Library library = new Library(bookList, consoleIO);
+        List<String> menuItems = Arrays.asList("Exit", "List Books", "Checkout Book");
+        when(consoleIO.mainMenu(menuItems)).thenReturn(2).thenReturn(0);
+        library.enter();
+        verify(consoleIO).inputBookTitle();
+    }
 
+
+    @Test
+    public void executingOption2WithExistingBookShouldDoSuccessfulCheckout() {
+        ConsoleIO consoleIO = mock(ConsoleIO.class);
+        BookList books = mock(BookList.class);
+        Library library = new Library(books, consoleIO);
+        List<String> menuItems = Arrays.asList("Exit", "List Books", "Checkout Book");
+        when(consoleIO.mainMenu(menuItems)).thenReturn(2).thenReturn(0);
+        when(consoleIO.inputBookTitle()).thenReturn("Book Name");
+        when(books.findBookByName("Book Name")).thenReturn(new Book("Book Name", "Author", 1000));
+        library.enter();
+        verify(books).remove(new Book("Book Name", "Author", 1000));
+    }
+
+    @Test
+    public void executingOption2WithExistingBookShouldDisplaySuccessfulCheckoutMessage() {
+        ConsoleIO consoleIO = mock(ConsoleIO.class);
+        BookList books = mock(BookList.class);
+        Library library = new Library(books, consoleIO);
+        List<String> menuItems = Arrays.asList("Exit", "List Books", "Checkout Book");
+        when(consoleIO.mainMenu(menuItems)).thenReturn(2).thenReturn(0);
+        when(consoleIO.inputBookTitle()).thenReturn("Book Name");
+        when(books.findBookByName("Book Name")).thenReturn(new Book("Book Name", "Author", 1000));
+        library.enter();
+        verify(consoleIO).display("Thank you! Enjoy the book!");
+    }
 }

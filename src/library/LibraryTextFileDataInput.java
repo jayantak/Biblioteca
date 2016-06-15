@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import static javafx.application.Platform.exit;
+
 //Understands input of books from file
 public class LibraryTextFileDataInput implements LibraryDataInput {
 
@@ -21,7 +23,7 @@ public class LibraryTextFileDataInput implements LibraryDataInput {
         try {
             scanner = new Scanner(file).useDelimiter("\\Z");
         } catch (FileNotFoundException e) {
-
+            exit();
         }
         String bookListString = scanner.next();
         String[] bookListData = bookListString.split("\n");

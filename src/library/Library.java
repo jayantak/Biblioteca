@@ -77,6 +77,15 @@ public class Library {
         Book foundBook = inventory.findBookByName(booktitle);
         if (foundBook != null) {
             inventory.remove(foundBook);
+            checkedOut.add(foundBook);
+            libraryIO.display("Thank you! Enjoy the book!");
+            return;
         }
+        foundBook = checkedOut.findBookByName(booktitle);
+        if(foundBook != null){
+            libraryIO.display("Sorry that book is checked out!");
+            return;
+        }
+        libraryIO.display("Sorry that book does not exist");
     }
 }

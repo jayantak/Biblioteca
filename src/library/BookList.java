@@ -13,7 +13,7 @@ public class BookList extends ArrayList<Book> {
         return printedSolution;
     }
 
-    public Book findBookByName(String booktitle) {
+    Book findBookByName(String booktitle) {
         for (Book book : this) {
             if (booktitle.equals(book.name)) {
                 return book;
