@@ -32,4 +32,27 @@ public class BookListTest {
 
         assertEquals(expected, books.print("%30s %30s %15s\n"));
     }
+
+    @Test
+    public void bookShouldBeFoundByName() {
+        BookList books = new BookList();
+
+        Book book = new Book("Book Name", "Author Name", 1999);
+        Book anotherBook = new Book("Another", "Author Name", 1999);
+        books.add(book);
+        books.add(anotherBook);
+
+        assertEquals(book, books.findBookByName("Book Name"));
+    }
+
+    @Test
+    public void absentBookShouldCauseReturnOfNull() {
+        BookList books = new BookList();
+
+        Book book = new Book("Book Name", "Author Name", 1999);
+        Book anotherBook = new Book("Another", "Author Name", 1999);
+        books.add(book);
+
+        assertEquals(null, books.findBookByName("Another"));
+    }
 }

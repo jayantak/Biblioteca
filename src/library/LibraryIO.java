@@ -11,4 +11,6 @@ public interface LibraryIO {
     int mainMenu(List<String> menuItems);
 
     void invalidOption();
+
+    String inputBookTitle();
 }

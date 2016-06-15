@@ -25,7 +25,7 @@ public class ConsoleIO implements LibraryIO {
                 "Choose option: ");
         int i = 0;
         for (String item : menuItems) {
-            System.out.println("\n" + i++ + item);
+            System.out.println("\n" + i++ + ". " + item);
         }
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
@@ -34,5 +34,11 @@ public class ConsoleIO implements LibraryIO {
     @Override
     public void invalidOption() {
         System.out.println("Select a valid option!");
+    }
+
+    @Override
+    public String inputBookTitle() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
 }

@@ -39,7 +39,7 @@ public class LibraryTest {
         ConsoleIO consoleIO = mock(ConsoleIO.class);
         BookList bookList = new BookList();
         Library library = new Library(bookList, consoleIO);
-        List<String> menuItems = Arrays.asList("Exit", "List Books");
+        List<String> menuItems = Arrays.asList("Exit", "List Books", "Checkout Book");
         when(consoleIO.mainMenu(menuItems)).thenReturn(0);
         library.enter();
         verify(consoleIO).mainMenu(menuItems);
@@ -50,7 +50,7 @@ public class LibraryTest {
         ConsoleIO consoleIO = mock(ConsoleIO.class);
         BookList bookList = new BookList();
         Library library = new Library(bookList, consoleIO);
-        List<String> menuItems = Arrays.asList("Exit", "List Books");
+        List<String> menuItems = Arrays.asList("Exit", "List Books", "Checkout Book");
         when(consoleIO.mainMenu(menuItems)).thenReturn(1).thenReturn(0);
         library.enter();
         verify(consoleIO).printBookList(bookList, "%30s %30s %30s\n");
@@ -61,7 +61,7 @@ public class LibraryTest {
         ConsoleIO consoleIO = mock(ConsoleIO.class);
         BookList bookList = new BookList();
         Library library = new Library(bookList, consoleIO);
-        List<String> menuItems = Arrays.asList("Exit", "List Books");
+        List<String> menuItems = Arrays.asList("Exit", "List Books", "Checkout Book");
         when(consoleIO.mainMenu(menuItems)).thenReturn(-1).thenReturn(0);
         library.enter();
         verify(consoleIO).invalidOption();

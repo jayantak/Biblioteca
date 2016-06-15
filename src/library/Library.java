@@ -7,6 +7,7 @@ import java.util.List;
 public class Library {
 
     private BookList inventory;
+    private BookList checkedOut = new BookList();
     private LibraryIO libraryIO;
 
     public Library(BookList inventory, LibraryIO libraryIO) {
@@ -24,7 +25,7 @@ public class Library {
 
     private void mainMenu() {
         boolean restart = true;
-        List<String> menuItems = Arrays.asList("Exit", "List Books");
+        List<String> menuItems = Arrays.asList("Exit", "List Books", "Checkout Book");
         while (restart) {
             int choice = libraryIO.mainMenu(menuItems);
             restart = execute(choice);
@@ -38,6 +39,10 @@ public class Library {
         }
         if (choice == 0) {
             return false;
+        }
+        if (choice == 2) {
+            checkout();
+            return true;
         }
         libraryIO.invalidOption();
         return true;
@@ -64,5 +69,14 @@ public class Library {
     public void enter() {
         libraryIO.display("Welcome to Biblioteca!");
         mainMenu();
+    }
+
+    public void checkout() {
+        libraryIO.display("Enter title of book to checkout: ");
+        String booktitle = libraryIO.inputBookTitle();
+        Book foundBook = inventory.findBookByName(booktitle);
+        if (foundBook != null) {
+            inventory.remove(foundBook);
+        }
     }
 }
