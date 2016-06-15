@@ -1,4 +1,7 @@
-package library;
+package io;
+
+import biblioteca.library.Book;
+import biblioteca.library.BookList;
 
 import java.util.List;
 import java.util.Scanner;

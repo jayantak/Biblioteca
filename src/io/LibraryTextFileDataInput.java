@@ -1,4 +1,7 @@
-package library;
+package io;
+
+import biblioteca.library.Book;
+import biblioteca.library.BookList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,7 +12,7 @@ import static javafx.application.Platform.exit;
 //Understands input of books from file
 public class LibraryTextFileDataInput implements LibraryDataInput {
 
-    String path;
+    private String path;
 
     public LibraryTextFileDataInput(String path) {
         this.path = path;
@@ -25,7 +28,10 @@ public class LibraryTextFileDataInput implements LibraryDataInput {
         } catch (FileNotFoundException e) {
             exit();
         }
-        String bookListString = scanner.next();
+        String bookListString = null;
+        if (scanner != null) {
+            bookListString = scanner.next();
+        }
         String[] bookListData = bookListString.split("\n");
         for (String bookData : bookListData) {
             String[] metaData = bookData.split(",");

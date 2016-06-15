@@ -1,4 +1,8 @@
-import library.*;
+import io.ConsoleIO;
+import io.LibraryDataInput;
+import io.LibraryIO;
+import io.LibraryTextFileDataInput;
+import biblioteca.library.*;
 
 import java.io.FileNotFoundException;
 

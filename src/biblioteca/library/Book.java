@@ -1,4 +1,4 @@
-package library;
+package biblioteca.library;
 
 //Understands the properties of a written novel
 public class Book {
