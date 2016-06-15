@@ -1,6 +1,6 @@
 package biblioteca.library;
 
-import io.ConsoleIO;
+import biblioteca.io.ConsoleIO;
 import org.junit.Test;
 
 import java.util.Arrays;

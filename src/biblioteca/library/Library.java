@@ -1,7 +1,7 @@
 package biblioteca.library;
 
-import io.ConsoleIO;
-import io.LibraryIO;
+import biblioteca.io.ConsoleIO;
+import biblioteca.io.LibraryIO;
 
 import java.util.Arrays;
 import java.util.List;

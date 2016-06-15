@@ -1,4 +1,4 @@
-package io;
+package biblioteca.io;
 
 import biblioteca.library.Book;
 import biblioteca.library.BookList;
