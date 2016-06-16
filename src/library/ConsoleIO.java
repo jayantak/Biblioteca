@@ -1,39 +1,38 @@
 package library;
 
-import java.io.FileNotFoundException;
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleIO implements LibraryIO {
 
-    Library library;
-
-    public ConsoleIO(Library library) {
-        this.library = library;
+    @Override
+    public void display(String welcomeMessage) {
+        System.out.println(welcomeMessage);
     }
 
     @Override
-    public void welcomeMessage() {
-        System.out.println(library.welcomeMessage());
-    }
-
-    @Override
-    public void printBookList() throws FileNotFoundException {
+    public void printBookList(BookList bookList, String format) {
         System.out.println("\nAvailable books : ");
-        System.out.println(library.bookList().print());
+        System.out.println(String.format(format, "Book Name", "Author", "Year of Publication"));
+        for (Book book : bookList) {
+            System.out.println(book.toString("%30s %30s %30s\n"));
+        }
     }
 
     @Override
-    public boolean mainMenu() throws FileNotFoundException {
+    public int mainMenu(List<String> menuItems) {
         System.out.println("" +
-                "Choose option: \n" +
-                "1. List Books\n" +
-                "2. Exit");
-        Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
-        if(choice == 1) {
-            printBookList();
-            return false;
+                "Choose option: ");
+        int i = 0;
+        for (String item : menuItems) {
+            System.out.println("\n" + i++ + item);
         }
-        return true;
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
+    }
+
+    @Override
+    public void invalidOption() {
+        System.out.println("Select a valid option!");
     }
 }

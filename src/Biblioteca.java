@@ -5,14 +5,10 @@ import java.io.FileNotFoundException;
 public class Biblioteca {
 
     public static void main(String[] args) throws FileNotFoundException {
-        LibraryDataInput libraryDataInput = new TextFileDataInput("exampleLibrary");
-        Library library = new Library(libraryDataInput.getBookList());
-        LibraryIO libraryIO = new ConsoleIO(library);
+        LibraryDataInput libraryDataInput = new LibraryTextFileDataInput("exampleLibrary");
+        LibraryIO libraryIO = new ConsoleIO();
+        Library library = new Library(libraryDataInput.getBookList(), libraryIO);
 
-        libraryIO.welcomeMessage();
-        boolean exit = false;
-        while(!exit){
-            exit = libraryIO.mainMenu();
-        }
+        library.enter();
     }
 }

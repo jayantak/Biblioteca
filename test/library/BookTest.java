@@ -2,7 +2,7 @@ package library;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class BookTest {
 
@@ -22,6 +22,6 @@ public class BookTest {
     @Test
     public void displayShouldShowData() {
         Book book = new Book("Book Name", "Author Name", 1999);
-        assertEquals("Book Name\tAuthor Name\t1999", book.display());
+        assertEquals(String.format("%30s %30s %30s\n", "Book Name", "Author Name", "1999"), book.toString("%30s %30s %30s\n"));
     }
 }

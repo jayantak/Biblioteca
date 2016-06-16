@@ -1,12 +1,14 @@
 package library;
 
-import java.io.FileNotFoundException;
+import java.util.List;
 
 public interface LibraryIO {
 
-    void welcomeMessage();
+    void display(String s);
 
-    void printBookList() throws FileNotFoundException;
+    void printBookList(BookList bookList, String format);
 
-    boolean mainMenu() throws FileNotFoundException;
+    int mainMenu(List<String> menuItems);
+
+    void invalidOption();
 }

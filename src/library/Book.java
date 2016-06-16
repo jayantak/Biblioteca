@@ -3,9 +3,9 @@ package library;
 //Understands the properties of a written novel
 class Book {
 
-    final String name;
-    final String author;
-    final int yearPublished;
+    private final String name;
+    private final String author;
+    private final int yearPublished;
 
     Book(String name, String author, int yearPublished) {
         this.name = name;
@@ -13,8 +13,8 @@ class Book {
         this.yearPublished = yearPublished;
     }
 
-    String display() {
-        return String.format("%30s %30s %15s", name , author , Integer.toString(yearPublished));
+    String toString(String format) {
+        return String.format(format, name, author, Integer.toString(yearPublished));
     }
 
     @Override
