@@ -3,10 +3,18 @@ package biblioteca.io;
 import biblioteca.library.Book;
 import biblioteca.library.BookList;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleIO implements LibraryIO {
+
+    private BufferedReader bufferedReader;
+
+    public ConsoleIO(BufferedReader bufferedReader) {
+        this.bufferedReader = bufferedReader;
+    }
 
     @Override
     public void display(String welcomeMessage) {
@@ -30,8 +38,13 @@ public class ConsoleIO implements LibraryIO {
         for (String item : menuItems) {
             System.out.println("\n" + i++ + ". " + item);
         }
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        int option = -1;
+        try {
+            option = Integer.parseInt(bufferedReader.readLine());
+        } catch (IOException e) {
+            System.out.println("Something went wrong with the input");
+        }
+        return option;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package biblioteca.library;
 
-import biblioteca.io.ConsoleIO;
 import biblioteca.io.LibraryIO;
 
 import java.util.Arrays;
@@ -23,14 +22,6 @@ public class Library {
         this(inventory, libraryIO, new BookList());
     }
 
-    Library(BookList bookList) {
-        this(bookList, new ConsoleIO(), new BookList());
-    }
-
-    BookList bookList() {
-        return inventory;
-    }
-
     private void mainMenu() {
         boolean restart = true;
         List<String> menuItems = Arrays.asList("Exit", "List Books", "Checkout Book", "Return Book");
@@ -42,7 +33,7 @@ public class Library {
 
     private boolean execute(int choice) {
         if (choice == 1) {
-            libraryIO.printBookList(inventory, "%30s %30s %30s\n");
+            libraryIO.printBookList(inventory, "%50s %30s %15s\n");
             return true;
         }
         if (choice == 0) {
@@ -61,20 +52,11 @@ public class Library {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Library library = (Library) o;
-
-        return inventory != null ? inventory.equals(library.inventory) : library.inventory == null;
-
-    }
-
-    @Override
     public String toString() {
         return "Library{" +
                 "inventory=" + inventory +
+                ", libraryIO=" + libraryIO +
+                ", checkedOut=" + checkedOut +
                 '}';
     }
 
@@ -111,7 +93,7 @@ public class Library {
             libraryIO.display("Thank you for returning the book!");
         }
         foundBook = inventory.findBookByName(bookTitle);
-        if(foundBook != null) {
+        if (foundBook != null) {
             libraryIO.display("That book has not been checked out!");
             return;
         }

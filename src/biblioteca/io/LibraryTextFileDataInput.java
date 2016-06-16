@@ -3,37 +3,32 @@ package biblioteca.io;
 import biblioteca.library.Book;
 import biblioteca.library.BookList;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
-import static javafx.application.Platform.exit;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 //Understands input of books from file
 public class LibraryTextFileDataInput implements LibraryDataInput {
 
-    private String path;
+    private BufferedReader bufferedReader;
 
-    public LibraryTextFileDataInput(String path) {
-        this.path = path;
+    public LibraryTextFileDataInput(BufferedReader bufferedReader) {
+        this.bufferedReader = bufferedReader;
     }
 
     public BookList getBookList() {
         BookList bookList = new BookList();
-        String pathname = System.getProperty("user.dir") + "/" + path + "/libraryInventory.books";
-        File file = new File(pathname);
-        Scanner scanner = null;
+        List<String> bookListStrings = new ArrayList<>();
+        String readLine;
         try {
-            scanner = new Scanner(file).useDelimiter("\\Z");
-        } catch (FileNotFoundException e) {
-            exit();
+            while ((readLine = bufferedReader.readLine()) != null) {
+                bookListStrings.add(readLine);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        String bookListString = null;
-        if (scanner != null) {
-            bookListString = scanner.next();
-        }
-        String[] bookListData = bookListString.split("\n");
-        for (String bookData : bookListData) {
+        for (String bookData : bookListStrings) {
             String[] metaData = bookData.split(",");
             bookList.add(new Book(metaData[0], metaData[1], Integer.parseInt(metaData[2])));
         }
