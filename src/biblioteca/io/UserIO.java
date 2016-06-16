@@ -1,8 +1,10 @@
-package library;
+package biblioteca.io;
+
+import biblioteca.library.BookList;
 
 import java.util.List;
 
-public interface LibraryIO {
+public interface UserIO {
 
     void display(String s);
 
@@ -11,4 +13,6 @@ public interface LibraryIO {
     int mainMenu(List<String> menuItems);
 
     void invalidOption();
+
+    String inputBookTitle();
 }

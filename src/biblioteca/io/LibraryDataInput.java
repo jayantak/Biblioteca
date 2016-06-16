@@ -1,4 +1,6 @@
-package library;
+package biblioteca.io;
+
+import biblioteca.library.BookList;
 
 import java.io.FileNotFoundException;
 

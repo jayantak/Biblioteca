@@ -1,19 +1,19 @@
-package library;
+package biblioteca.library;
 
 //Understands the properties of a written novel
-class Book {
+public class Book {
 
-    private final String name;
-    private final String author;
-    private final int yearPublished;
+    final String name;
+    final String author;
+    final int yearPublished;
 
-    Book(String name, String author, int yearPublished) {
+    public Book(String name, String author, int yearPublished) {
         this.name = name;
         this.author = author;
         this.yearPublished = yearPublished;
     }
 
-    String toString(String format) {
+    public String toString(String format) {
         return String.format(format, name, author, Integer.toString(yearPublished));
     }
 
