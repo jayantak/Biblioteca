@@ -1,7 +1,7 @@
 package biblioteca.io;
 
-import biblioteca.library.Book;
-import biblioteca.library.BookList;
+import biblioteca.library.Lendable;
+import biblioteca.library.LendableList;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,11 +23,13 @@ public class ConsoleIO implements UserIO {
     }
 
     @Override
-    public void printBookList(BookList bookList, String format) {
+    public void printList(LendableList lendableList, Lendable lendableType, String format) {
         System.out.println("\nAvailable books : ");
-        System.out.println(String.format(format, "Book Name", "Author", "Year of Publication"));
-        for (Book book : bookList) {
-            System.out.println(book.toString("%30s %30s %30s\n"));
+        for (Lendable lendable : lendableList) {
+            if (lendable.getClass() != lendableType.getClass()) {
+                continue;
+            }
+            System.out.println(lendable.toString("%30s %30s %30s\n"));
         }
     }
 

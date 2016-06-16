@@ -1,7 +1,7 @@
 package biblioteca.library.menuCommands;
 
 import biblioteca.io.UserIO;
-import biblioteca.library.Book;
+import biblioteca.library.Lendable;
 import biblioteca.library.Library;
 
 //Understands how to checkout a book
@@ -19,7 +19,7 @@ public class CheckoutBook implements LibraryFunction {
     public boolean run() {
         userIO.display("Enter title of book to checkout: ");
         String bookTitle = userIO.inputBookTitle();
-        Book foundBook = library.getCheckedOutBookByName(bookTitle);
+        Lendable foundBook = library.getCheckedOutBookByName(bookTitle);
         if (foundBook != null) {
             userIO.display("Sorry that book is checked out!");
             return true;

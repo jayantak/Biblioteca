@@ -5,9 +5,7 @@ import biblioteca.library.Book;
 import biblioteca.library.Library;
 import org.junit.Test;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class ReturnBookTest {
 

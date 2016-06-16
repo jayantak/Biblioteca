@@ -13,8 +13,8 @@ import static org.mockito.Mockito.*;
 
 public class MenuTest {
     private ConsoleIO consoleIO;
-    private BookList available;
-    private BookList checkedOut;
+    private LendableList available;
+    private LendableList checkedOut;
     private Library library;
     private List<LibraryFunction> options = new ArrayList<>();
     private List<String> menuItems = new ArrayList<>();
@@ -22,8 +22,8 @@ public class MenuTest {
     @Before
     public void setUp() throws Exception {
         consoleIO = mock(ConsoleIO.class);
-        available = mock(BookList.class);
-        checkedOut = mock(BookList.class);
+        available = mock(LendableList.class);
+        checkedOut = mock(LendableList.class);
         library = mock(Library.class);
 
         LibraryFunction exit = mock(Exit.class);

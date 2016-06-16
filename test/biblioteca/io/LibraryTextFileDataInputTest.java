@@ -1,7 +1,7 @@
 package biblioteca.io;
 
 import biblioteca.library.Book;
-import biblioteca.library.BookList;
+import biblioteca.library.LendableList;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -19,7 +19,7 @@ public class LibraryTextFileDataInputTest {
         LibraryDataInput libraryDataInput = new LibraryTextFileDataInput(fileInput);
         when(fileInput.readLine()).thenReturn("The Book Thief,Marcus Zusak,2006").thenReturn(null);
 
-        BookList books = new BookList();
+        LendableList books = new LendableList();
         books.add(new Book("The Book Thief", "Marcus Zusak", 2006));
         assertEquals(books, libraryDataInput.getBookList());
     }

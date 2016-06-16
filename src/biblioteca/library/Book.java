@@ -1,7 +1,7 @@
 package biblioteca.library;
 
 //Understands the properties of a written novel
-public class Book {
+public class Book implements Lendable {
 
     final String name;
     final String author;
@@ -27,8 +27,8 @@ public class Book {
         if (yearPublished != book.yearPublished) return false;
         if (name != null ? !name.equals(book.name) : book.name != null) return false;
         return author != null ? author.equals(book.author) : book.author == null;
-
     }
+
 
     @Override
     public String toString() {
@@ -37,5 +37,10 @@ public class Book {
                 ", author='" + author + '\'' +
                 ", yearPublished=" + yearPublished +
                 '}';
+    }
+
+    @Override
+    public boolean hasSameName(String otherName) {
+        return this.name.equals(otherName);
     }
 }

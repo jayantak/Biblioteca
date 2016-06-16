@@ -1,7 +1,7 @@
 package biblioteca.library.menuCommands;
 
 import biblioteca.io.UserIO;
-import biblioteca.library.Book;
+import biblioteca.library.Lendable;
 import biblioteca.library.Library;
 
 //Understands how to return a book
@@ -19,7 +19,7 @@ public class ReturnBook implements LibraryFunction {
     public boolean run() {
         userIO.display("Enter title of book to return: ");
         String bookTitle = userIO.inputBookTitle();
-        Book foundBook = library.getAvailableBookByName(bookTitle);
+        Lendable foundBook = library.getAvailableBookByName(bookTitle);
         if (foundBook != null) {
             userIO.display("That book has not been checked out!");
             return true;

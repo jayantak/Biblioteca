@@ -2,7 +2,7 @@ import biblioteca.io.ConsoleIO;
 import biblioteca.io.LibraryDataInput;
 import biblioteca.io.LibraryTextFileDataInput;
 import biblioteca.io.UserIO;
-import biblioteca.library.BookList;
+import biblioteca.library.LendableList;
 import biblioteca.library.Library;
 import biblioteca.library.Menu;
 import biblioteca.library.menuCommands.*;
@@ -23,7 +23,7 @@ public class Biblioteca {
 
         LibraryDataInput libraryDataInput = new LibraryTextFileDataInput(bookPropertiesReader);
         UserIO userIO = new ConsoleIO(consoleInput);
-        Library library = new Library(libraryDataInput.getBookList(), new BookList());
+        Library library = new Library(libraryDataInput.getBookList(), new LendableList());
 
         List<LibraryFunction> options = new ArrayList<>();
 
@@ -31,6 +31,7 @@ public class Biblioteca {
         options.add(new ListBooks(userIO, library));
         options.add(new CheckoutBook(userIO, library));
         options.add(new ReturnBook(userIO, library));
+        options.add(new ListMovies(userIO, library));
 
         Menu menu = new Menu(userIO, options);
 

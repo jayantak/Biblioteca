@@ -3,31 +3,31 @@ package biblioteca.library;
 //Understands lending and returning of books
 public class Library {
 
-    private BookList available;
-    private BookList checkedOut;
+    private LendableList available;
+    private LendableList checkedOut;
 
-    public Library(BookList available, BookList checkedOut) {
+    public Library(LendableList available, LendableList checkedOut) {
         this.available = available;
         this.checkedOut = checkedOut;
     }
 
-    public void checkoutBook(Book foundBook) {
-        available.move(checkedOut, foundBook);
+    public void checkoutBook(Lendable foundLendable) {
+        available.move(checkedOut, foundLendable);
     }
 
-    public Book getAvailableBookByName(String bookTitle) {
-        return available.findBookByName(bookTitle);
+    public Lendable getAvailableBookByName(String bookTitle) {
+        return available.findByName(bookTitle);
     }
 
-    public void returnBook(Book foundBook) {
-        checkedOut.move(available, foundBook);
+    public void returnBook(Lendable foundLendable) {
+        checkedOut.move(available, foundLendable);
     }
 
-    public Book getCheckedOutBookByName(String bookTitle) {
-        return checkedOut.findBookByName(bookTitle);
+    public Lendable getCheckedOutBookByName(String bookTitle) {
+        return checkedOut.findByName(bookTitle);
     }
 
-    public BookList available() {
+    public LendableList available() {
         return available;
     }
 }

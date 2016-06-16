@@ -1,28 +1,27 @@
 package biblioteca.library.menuCommands;
 
 import biblioteca.io.UserIO;
-import biblioteca.library.Book;
 import biblioteca.library.Library;
+import biblioteca.library.Movie;
 
-//Understands how to list the books
-public class ListBooks implements LibraryFunction {
+public class ListMovies implements LibraryFunction {
 
     private UserIO userIO;
     private Library library;
 
-    public ListBooks(UserIO userIO, Library library) {
+    public ListMovies(UserIO userIO, Library library) {
         this.userIO = userIO;
         this.library = library;
     }
 
     @Override
     public boolean run() {
-        userIO.printList(library.available(), new Book("", "", 0), "%50s %30s %15s\n");
+        userIO.printList(library.available(), new Movie("", "", 0, 0), "%50s %30s %15s %15s\n");
         return true;
     }
 
     @Override
     public String toString() {
-        return "List Books";
+        return "List Movies";
     }
 }

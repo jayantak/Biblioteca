@@ -1,7 +1,8 @@
 package biblioteca.io;
 
 import biblioteca.library.Book;
-import biblioteca.library.BookList;
+import biblioteca.library.LendableList;
+import biblioteca.library.Movie;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,8 +18,8 @@ public class LibraryTextFileDataInput implements LibraryDataInput {
         this.bufferedReader = bufferedReader;
     }
 
-    public BookList getBookList() {
-        BookList bookList = new BookList();
+    public LendableList getBookList() {
+        LendableList lendableList = new LendableList();
         List<String> bookListStrings = new ArrayList<>();
         String readLine;
         try {
@@ -30,9 +31,14 @@ public class LibraryTextFileDataInput implements LibraryDataInput {
         }
         for (String bookData : bookListStrings) {
             String[] metaData = bookData.split(",");
-            bookList.add(new Book(metaData[0], metaData[1], Integer.parseInt(metaData[2])));
+            if (metaData.length == 3) {
+                lendableList.add(new Book(metaData[0], metaData[1], Integer.parseInt(metaData[2])));
+            }
+            if (metaData.length == 4) {
+                lendableList.add(new Movie(metaData[0], metaData[1], Integer.parseInt(metaData[2]), Integer.parseInt(metaData[3])));
+            }
         }
-        return bookList;
+        return lendableList;
     }
 
 }

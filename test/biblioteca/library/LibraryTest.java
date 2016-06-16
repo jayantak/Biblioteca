@@ -9,26 +9,26 @@ public class LibraryTest {
 
     @Test
     public void availableBookShouldBeFoundByName() {
-        BookList available = mock(BookList.class);
-        BookList checkedOut = mock(BookList.class);
+        LendableList available = mock(LendableList.class);
+        LendableList checkedOut = mock(LendableList.class);
         Library library = new Library(available, checkedOut);
         library.getAvailableBookByName("Book Name");
-        verify(available).findBookByName("Book Name");
+        verify(available).findByName("Book Name");
     }
 
     @Test
     public void checkedOutBookShouldBeFoundByName() {
-        BookList available = mock(BookList.class);
-        BookList checkedOut = mock(BookList.class);
+        LendableList available = mock(LendableList.class);
+        LendableList checkedOut = mock(LendableList.class);
         Library library = new Library(available, checkedOut);
         library.getCheckedOutBookByName("Book Name");
-        verify(checkedOut).findBookByName("Book Name");
+        verify(checkedOut).findByName("Book Name");
     }
 
     @Test
     public void checkoutBookShouldMoveBookFromCheckedOutToAvailable() {
-        BookList available = mock(BookList.class);
-        BookList checkedOut = mock(BookList.class);
+        LendableList available = mock(LendableList.class);
+        LendableList checkedOut = mock(LendableList.class);
         Library library = new Library(available, checkedOut);
         Book book = mock(Book.class);
         library.checkoutBook(book);
@@ -37,8 +37,8 @@ public class LibraryTest {
 
     @Test
     public void returnBookShouldMoveBookFromCheckedOutToAvailable() {
-        BookList available = mock(BookList.class);
-        BookList checkedOut = mock(BookList.class);
+        LendableList available = mock(LendableList.class);
+        LendableList checkedOut = mock(LendableList.class);
         Library library = new Library(available, checkedOut);
         Book book = mock(Book.class);
         library.returnBook(book);

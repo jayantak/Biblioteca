@@ -3,13 +3,11 @@ package biblioteca.library.menuCommands;
 import biblioteca.io.ConsoleIO;
 import biblioteca.io.UserIO;
 import biblioteca.library.Book;
-import biblioteca.library.BookList;
+import biblioteca.library.LendableList;
 import biblioteca.library.Library;
 import org.junit.Test;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class ListBooksTest {
 
@@ -17,7 +15,7 @@ public class ListBooksTest {
     public void shouldPrintBookList() {
         UserIO userIO = mock(ConsoleIO.class);
         Library library = mock(Library.class);
-        BookList books = mock(BookList.class);
+        LendableList books = mock(LendableList.class);
         Book book = mock(Book.class);
 
         ListBooks listBooks = new ListBooks(userIO, library);
@@ -27,6 +25,6 @@ public class ListBooksTest {
 
         listBooks.run();
 
-        verify(userIO).printBookList(books, "%50s %30s %15s\n");
+        verify(userIO).printList(books, new Book("", "", 0), "%50s %30s %15s\n");
     }
 }
