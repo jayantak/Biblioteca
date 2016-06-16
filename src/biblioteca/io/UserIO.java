@@ -4,7 +4,7 @@ import biblioteca.library.BookList;
 
 import java.util.List;
 
-public interface LibraryIO {
+public interface UserIO {
 
     void display(String s);
 

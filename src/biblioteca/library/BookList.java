@@ -13,4 +13,9 @@ public class BookList extends ArrayList<Book> {
         }
         return null;
     }
+
+    void move(BookList other, Book book) {
+        this.remove(book);
+        other.add(book);
+    }
 }

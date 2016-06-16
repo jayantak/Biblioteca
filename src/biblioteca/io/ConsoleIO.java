@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-public class ConsoleIO implements LibraryIO {
+public class ConsoleIO implements UserIO {
 
     private BufferedReader bufferedReader;
 

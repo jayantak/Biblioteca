@@ -1,8 +1,9 @@
 import biblioteca.io.ConsoleIO;
 import biblioteca.io.LibraryDataInput;
-import biblioteca.io.LibraryIO;
+import biblioteca.io.UserIO;
 import biblioteca.io.LibraryTextFileDataInput;
 import biblioteca.library.Library;
+import biblioteca.library.Menu;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -17,9 +18,10 @@ public class Biblioteca {
         BufferedReader consoleInput = new BufferedReader(new InputStreamReader(System.in));
 
         LibraryDataInput libraryDataInput = new LibraryTextFileDataInput(bookPropertiesReader);
-        LibraryIO libraryIO = new ConsoleIO(consoleInput);
-        Library library = new Library(libraryDataInput.getBookList(), libraryIO);
+        UserIO userIO = new ConsoleIO(consoleInput);
+        Library library = new Library(libraryDataInput.getBookList(), userIO);
+        Menu menu = new Menu(userIO, library);
 
-        library.enter();
+        menu.enter();
     }
 }
