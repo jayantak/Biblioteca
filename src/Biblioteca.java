@@ -2,6 +2,7 @@ import biblioteca.io.ConsoleIO;
 import biblioteca.io.LibraryDataInput;
 import biblioteca.io.UserIO;
 import biblioteca.io.LibraryTextFileDataInput;
+import biblioteca.library.BookList;
 import biblioteca.library.Library;
 import biblioteca.library.Menu;
 
@@ -19,7 +20,7 @@ public class Biblioteca {
 
         LibraryDataInput libraryDataInput = new LibraryTextFileDataInput(bookPropertiesReader);
         UserIO userIO = new ConsoleIO(consoleInput);
-        Library library = new Library(libraryDataInput.getBookList(), userIO);
+        Library library = new Library(libraryDataInput.getBookList(), new BookList());
         Menu menu = new Menu(userIO, library);
 
         menu.enter();

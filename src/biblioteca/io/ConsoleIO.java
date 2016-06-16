@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
+//Understands user interactions on the console
 public class ConsoleIO implements UserIO {
 
     private BufferedReader bufferedReader;
