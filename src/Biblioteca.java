@@ -1,15 +1,18 @@
 import biblioteca.io.ConsoleIO;
 import biblioteca.io.LibraryDataInput;
-import biblioteca.io.UserIO;
 import biblioteca.io.LibraryTextFileDataInput;
+import biblioteca.io.UserIO;
 import biblioteca.library.BookList;
 import biblioteca.library.Library;
 import biblioteca.library.Menu;
+import biblioteca.library.menuCommands.*;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Biblioteca {
 
@@ -21,7 +24,15 @@ public class Biblioteca {
         LibraryDataInput libraryDataInput = new LibraryTextFileDataInput(bookPropertiesReader);
         UserIO userIO = new ConsoleIO(consoleInput);
         Library library = new Library(libraryDataInput.getBookList(), new BookList());
-        Menu menu = new Menu(userIO, library);
+
+        List<LibraryFunction> options = new ArrayList<>();
+
+        options.add(new Exit());
+        options.add(new ListBooks(userIO, library));
+        options.add(new CheckoutBook(userIO, library));
+        options.add(new ReturnBook(userIO, library));
+
+        Menu menu = new Menu(userIO, options);
 
         menu.enter();
     }

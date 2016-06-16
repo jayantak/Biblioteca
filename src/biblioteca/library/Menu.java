@@ -1,19 +1,21 @@
 package biblioteca.library;
 
 import biblioteca.io.UserIO;
+import biblioteca.library.menuCommands.LibraryFunction;
+import biblioteca.library.menuCommands.PrintInvalid;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 //Understands the interactions with the user
 public class Menu {
 
-    UserIO userIO;
-    Library library;
+    private UserIO userIO;
+    private List<LibraryFunction> commands;
 
-    public Menu(UserIO userIO, Library library) {
+    public Menu(UserIO userIO, List<LibraryFunction> commands) {
         this.userIO = userIO;
-        this.library = library;
+        this.commands = commands;
     }
 
     public void enter() {
@@ -23,64 +25,23 @@ public class Menu {
 
     private void mainMenu() {
         boolean restart = true;
-        List<String> menuItems = Arrays.asList("Exit", "List Books", "Checkout Book", "Return Book");
+
+        List<String> menuItems = commands.stream()
+                .map(Object::toString)
+                .collect(Collectors.toList());
+
         while (restart) {
-            int choice = userIO.mainMenu(menuItems);
-            restart = execute(choice);
+            LibraryFunction libraryFunction = getCommand(menuItems);
+            restart = libraryFunction.run();
         }
     }
 
-    boolean execute(int choice) {
-        if (choice == 1) {
-            userIO.printBookList(library.available(), "%50s %30s %15s\n");
-            return true;
+    private LibraryFunction getCommand(List<String> menuItems) {
+        int choice = userIO.mainMenu(menuItems);
+        LibraryFunction libraryFunction = commands.get(choice);
+        if (libraryFunction == null) {
+            libraryFunction = new PrintInvalid(userIO);
         }
-        if (choice == 0) {
-            return false;
-        }
-        if (choice == 2) {
-            checkout();
-            return true;
-        }
-        if (choice == 3) {
-            returnBook();
-            return true;
-        }
-        userIO.invalidOption();
-        return true;
-    }
-
-    private void checkout() {
-        userIO.display("Enter title of book to checkout: ");
-        String bookTitle = userIO.inputBookTitle();
-        Book foundBook = library.getCheckedOutBookByName(bookTitle);
-        if (foundBook != null) {
-            userIO.display("Sorry that book is checked out!");
-            return;
-        }
-        foundBook = library.getAvailableBookByName(bookTitle);
-        if (foundBook != null) {
-            library.checkoutBook(foundBook);
-            userIO.display("Thank you! Enjoy the book!");
-            return;
-        }
-        userIO.display("Sorry that book does not exist!");
-    }
-
-
-    private void returnBook() {
-        userIO.display("Enter title of book to return: ");
-        String bookTitle = userIO.inputBookTitle();
-        Book foundBook = library.getAvailableBookByName(bookTitle);
-        if (foundBook != null) {
-            userIO.display("That book has not been checked out!");
-            return;
-        }
-        foundBook = library.getCheckedOutBookByName(bookTitle);
-        if (foundBook != null) {
-            library.returnBook(foundBook);
-            userIO.display("Thank you for returning the book!");
-        }
-        userIO.display("Sorry that book does not exist!");
+        return libraryFunction;
     }
 }

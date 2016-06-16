@@ -11,19 +11,19 @@ public class Library {
         this.checkedOut = checkedOut;
     }
 
-    void checkoutBook(Book foundBook) {
+    public void checkoutBook(Book foundBook) {
         available.move(checkedOut, foundBook);
     }
 
-    Book getAvailableBookByName(String bookTitle) {
+    public Book getAvailableBookByName(String bookTitle) {
         return available.findBookByName(bookTitle);
     }
 
-    void returnBook(Book foundBook) {
+    public void returnBook(Book foundBook) {
         checkedOut.move(available, foundBook);
     }
 
-    Book getCheckedOutBookByName(String bookTitle) {
+    public Book getCheckedOutBookByName(String bookTitle) {
         return checkedOut.findBookByName(bookTitle);
     }
 
