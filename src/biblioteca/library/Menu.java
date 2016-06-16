@@ -60,7 +60,7 @@ public class Menu {
         }
         foundBook = library.getAvailableBookByName(bookTitle);
         if (foundBook != null) {
-            library.returnbook(foundBook);
+            library.checkoutBook(foundBook);
             userIO.display("Thank you! Enjoy the book!");
             return;
         }
@@ -78,7 +78,7 @@ public class Menu {
         }
         foundBook = library.getCheckedOutBookByName(bookTitle);
         if (foundBook != null) {
-            library.checkoutBook(foundBook);
+            library.returnBook(foundBook);
             userIO.display("Thank you for returning the book!");
         }
         userIO.display("Sorry that book does not exist!");

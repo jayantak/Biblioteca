@@ -4,7 +4,6 @@ package biblioteca.library;
 public class Library {
 
     private BookList available;
-
     private BookList checkedOut;
 
     public Library(BookList available, BookList checkedOut) {
@@ -12,7 +11,7 @@ public class Library {
         this.checkedOut = checkedOut;
     }
 
-    void returnbook(Book foundBook) {
+    void checkoutBook(Book foundBook) {
         available.move(checkedOut, foundBook);
     }
 
@@ -20,7 +19,7 @@ public class Library {
         return available.findBookByName(bookTitle);
     }
 
-    void checkoutBook(Book foundBook) {
+    void returnBook(Book foundBook) {
         checkedOut.move(available, foundBook);
     }
 

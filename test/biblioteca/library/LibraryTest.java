@@ -1,128 +1,47 @@
 package biblioteca.library;
 
-import biblioteca.io.ConsoleIO;
-import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class LibraryTest {
 
-    private List<String> menuItems;
-    private ConsoleIO consoleIO;
-    private BookList available;
-    private BookList checkedOut;
-
-    @Before
-    public void setUp() throws Exception {
-        menuItems = Arrays.asList("Exit", "List Books", "Checkout Book", "Return Book");
-        consoleIO = mock(ConsoleIO.class);
-        available = mock(BookList.class);
-        checkedOut = mock(BookList.class);
+    @Test
+    public void availableBookShouldBeFoundByName() {
+        BookList available = mock(BookList.class);
+        BookList checkedOut = mock(BookList.class);
+        Library library = new Library(available, checkedOut);
+        library.getAvailableBookByName("Book Name");
+        verify(available).findBookByName("Book Name");
     }
 
     @Test
-    public void welcomeMessage() {
+    public void checkedOutBookShouldBeFoundByName() {
+        BookList available = mock(BookList.class);
+        BookList checkedOut = mock(BookList.class);
         Library library = new Library(available, checkedOut);
-        Menu menu = new Menu(consoleIO, library);
-        menu.enter();
-        verify(consoleIO).display("Welcome to Biblioteca!");
+        library.getCheckedOutBookByName("Book Name");
+        verify(checkedOut).findBookByName("Book Name");
     }
 
     @Test
-    public void mainMenuShouldPrintMenu() {
+    public void checkoutBookShouldMoveBookFromCheckedOutToAvailable() {
+        BookList available = mock(BookList.class);
+        BookList checkedOut = mock(BookList.class);
         Library library = new Library(available, checkedOut);
-        when(consoleIO.mainMenu(menuItems)).thenReturn(0);
-        Menu menu = new Menu(consoleIO, library);
-        menu.enter();
-        verify(consoleIO).mainMenu(menuItems);
+        Book book = mock(Book.class);
+        library.checkoutBook(book);
+        verify(available).move(checkedOut, book);
     }
 
     @Test
-    public void executingOption1ShouldPrintListOfBooks() {
+    public void returnBookShouldMoveBookFromCheckedOutToAvailable() {
+        BookList available = mock(BookList.class);
+        BookList checkedOut = mock(BookList.class);
         Library library = new Library(available, checkedOut);
-        when(consoleIO.mainMenu(menuItems)).thenReturn(1).thenReturn(0);
-        Menu menu = new Menu(consoleIO, library);
-        menu.enter();
-        verify(consoleIO).printBookList(available, "%50s %30s %15s\n");
-    }
-
-    @Test
-    public void executingOption0ShouldShowInvalidOption() {
-        Library library = new Library(available, checkedOut);
-        when(consoleIO.mainMenu(menuItems)).thenReturn(-1).thenReturn(0);
-        Menu menu = new Menu(consoleIO, library);
-        menu.enter();
-        verify(consoleIO).invalidOption();
-    }
-
-    @Test
-    public void executingOption2ShouldCheckoutBook() {
-        Library library = new Library(available, checkedOut);
-        when(consoleIO.mainMenu(menuItems)).thenReturn(2).thenReturn(0);
-        Menu menu = new Menu(consoleIO, library);
-        menu.enter();
-        verify(consoleIO).inputBookTitle();
-    }
-
-
-    @Test
-    public void checkingOutWithExistingBookShouldDoSuccessfulCheckout() {
-        Library library = new Library(available, checkedOut);
-        when(consoleIO.mainMenu(menuItems)).thenReturn(2).thenReturn(0);
-        when(consoleIO.inputBookTitle()).thenReturn("Book Name");
-        when(available.findBookByName("Book Name")).thenReturn(new Book("Book Name", "Author", 1000));
-        Menu menu = new Menu(consoleIO, library);
-        menu.enter();
-        verify(available).move(checkedOut, new Book("Book Name", "Author", 1000));
-    }
-
-    @Test
-    public void executingOption2WithExistingBookShouldDisplaySuccessfulCheckoutMessage() {
-        Library library = new Library(available, checkedOut);
-        when(consoleIO.mainMenu(menuItems)).thenReturn(2).thenReturn(0);
-        when(consoleIO.inputBookTitle()).thenReturn("Book Name");
-        when(available.findBookByName("Book Name")).thenReturn(new Book("Book Name", "Author", 1000));
-        Menu menu = new Menu(consoleIO, library);
-        menu.enter();
-        verify(consoleIO).display("Thank you! Enjoy the book!");
-    }
-
-    @Test
-    public void returningExistingBookShouldRemoveBookFromCheckedOutAndAddToInventory() {
-        Library library = new Library(available, checkedOut);
-        when(consoleIO.mainMenu(menuItems)).thenReturn(3).thenReturn(0);
-        when(consoleIO.inputBookTitle()).thenReturn("Book Name");
-        when(checkedOut.findBookByName("Book Name")).thenReturn(new Book("Book Name", "Author", 1000));
-        Menu menu = new Menu(consoleIO, library);
-        menu.enter();
-        verify(checkedOut).move(available, new Book("Book Name", "Author", 1000));
-    }
-
-    @Test
-    public void returningBookInInventoryShouldDisplayNotCheckedOut() {
-        Library library = new Library(available, checkedOut);
-        when(consoleIO.mainMenu(menuItems)).thenReturn(3).thenReturn(0);
-        when(consoleIO.inputBookTitle()).thenReturn("Book Name");
-        when(checkedOut.findBookByName("Book Name")).thenReturn(null);
-        when(available.findBookByName("Book Name")).thenReturn(new Book("Book Name", "Author", 1000));
-        Menu menu = new Menu(consoleIO, library);
-        menu.enter();
-        verify(consoleIO).display("That book has not been checked out!");
-    }
-
-    @Test
-    public void returningBookInInventoryShouldDisplayDoesNotExist() {
-        Library library = new Library(available, checkedOut);
-        when(consoleIO.mainMenu(menuItems)).thenReturn(3).thenReturn(0);
-        when(consoleIO.inputBookTitle()).thenReturn("Book Name");
-        when(checkedOut.findBookByName("Book Name")).thenReturn(null);
-        when(available.findBookByName("Book Name")).thenReturn(null);
-        Menu menu = new Menu(consoleIO, library);
-        menu.enter();
-        verify(consoleIO).display("Sorry that book does not exist!");
+        Book book = mock(Book.class);
+        library.returnBook(book);
+        verify(checkedOut).move(available, book);
     }
 }
