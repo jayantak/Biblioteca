@@ -20,17 +20,17 @@ public class LibraryTextFileDataInput implements LibraryDataInput {
 
     public LendableList getBookList() {
         LendableList lendableList = new LendableList();
-        List<String> bookListStrings = new ArrayList<>();
+        List<String> lendableListStrings = new ArrayList<>();
         String readLine;
         try {
             while ((readLine = bufferedReader.readLine()) != null) {
-                bookListStrings.add(readLine);
+                lendableListStrings.add(readLine);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (String bookData : bookListStrings) {
-            String[] metaData = bookData.split(",");
+        for (String data : lendableListStrings) {
+            String[] metaData = data.split(",");
             if (metaData.length == 3) {
                 lendableList.add(new Book(metaData[0], metaData[1], Integer.parseInt(metaData[2])));
             }

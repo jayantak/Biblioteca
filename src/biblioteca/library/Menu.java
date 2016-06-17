@@ -1,6 +1,7 @@
 package biblioteca.library;
 
 import biblioteca.io.UserIO;
+import biblioteca.library.menuCommands.Continue;
 import biblioteca.library.menuCommands.LibraryFunction;
 import biblioteca.library.menuCommands.PrintInvalid;
 
@@ -38,7 +39,12 @@ public class Menu {
 
     private LibraryFunction getCommand(List<String> menuItems) {
         int choice = userIO.mainMenu(menuItems);
-        LibraryFunction libraryFunction = commands.get(choice);
+        LibraryFunction libraryFunction;
+        try {
+            libraryFunction = commands.get(choice);
+        } catch (Exception e) {
+            return new Continue();
+        }
         if (libraryFunction == null) {
             libraryFunction = new PrintInvalid(userIO);
         }

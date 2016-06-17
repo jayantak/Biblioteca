@@ -2,10 +2,10 @@ package biblioteca.library;
 
 public class Movie implements Lendable {
 
-    final String name;
-    final String director;
-    final int year;
-    final int rating;
+    private final String name;
+    private final String director;
+    private final int year;
+    private final int rating;
 
     public Movie(String name, String director, int year, int rating) {
         this.name = name;

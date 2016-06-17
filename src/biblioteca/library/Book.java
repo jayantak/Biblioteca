@@ -3,9 +3,9 @@ package biblioteca.library;
 //Understands the properties of a written novel
 public class Book implements Lendable {
 
-    final String name;
-    final String author;
-    final int yearPublished;
+    private final String name;
+    private final String author;
+    private final int yearPublished;
 
     public Book(String name, String author, int yearPublished) {
         this.name = name;

@@ -2,29 +2,29 @@ package biblioteca.library.menuCommands;
 
 import biblioteca.io.ConsoleIO;
 import biblioteca.io.UserIO;
-import biblioteca.library.Book;
 import biblioteca.library.LendableList;
 import biblioteca.library.Library;
+import biblioteca.library.Movie;
 import org.junit.Test;
 
 import static org.mockito.Mockito.*;
 
-public class ListBooksTest {
+public class ListMoviesTest {
 
     @Test
-    public void shouldPrintBookList() {
+    public void shouldPrintMovieList() {
         UserIO userIO = mock(ConsoleIO.class);
         Library library = mock(Library.class);
-        LendableList books = mock(LendableList.class);
-        Book book = mock(Book.class);
+        LendableList items = mock(LendableList.class);
+        Movie movie = mock(Movie.class);
 
         ListBooks listBooks = new ListBooks(userIO, library);
 
-        when(library.available()).thenReturn(books);
-        when(books.get(0)).thenReturn(book);
+        when(library.available()).thenReturn(items);
+        when(items.get(0)).thenReturn(movie);
 
         listBooks.run();
 
-        verify(userIO).printList(books, "%50s %30s %15s\n");
+        verify(userIO).printList(items, "%50s %30s %15s %15s\n");
     }
 }

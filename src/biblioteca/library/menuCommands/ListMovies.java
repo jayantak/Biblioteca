@@ -1,6 +1,8 @@
 package biblioteca.library.menuCommands;
 
 import biblioteca.io.UserIO;
+import biblioteca.library.Lendable;
+import biblioteca.library.LendableList;
 import biblioteca.library.Library;
 import biblioteca.library.Movie;
 
@@ -16,7 +18,15 @@ public class ListMovies implements LibraryFunction {
 
     @Override
     public boolean run() {
-        userIO.printList(library.available(), new Movie("", "", 0, 0), "%50s %30s %15s %15s\n");
+        LendableList toPrint = new LendableList();
+        for (Lendable lendable : library.available()) {
+            if (lendable.getClass() != Movie.class) {
+                continue;
+            }
+            toPrint.add(lendable);
+        }
+
+        userIO.printList(toPrint, "%50s %30s %15s %15s\n");
         return true;
     }
 

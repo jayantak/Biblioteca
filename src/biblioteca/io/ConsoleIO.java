@@ -23,13 +23,10 @@ public class ConsoleIO implements UserIO {
     }
 
     @Override
-    public void printList(LendableList lendableList, Lendable lendableType, String format) {
+    public void printList(LendableList lendableList, String format) {
         System.out.println("\nAvailable books : ");
         for (Lendable lendable : lendableList) {
-            if (lendable.getClass() != lendableType.getClass()) {
-                continue;
-            }
-            System.out.println(lendable.toString("%30s %30s %30s\n"));
+            System.out.println(lendable.toString(format));
         }
     }
 
@@ -44,8 +41,8 @@ public class ConsoleIO implements UserIO {
         int option = -1;
         try {
             option = Integer.parseInt(bufferedReader.readLine());
-        } catch (IOException e) {
-            System.out.println("Something went wrong with the input");
+        } catch (Exception e) {
+            System.out.println("Something went wrong with the input, try again");
         }
         return option;
     }
