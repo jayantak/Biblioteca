@@ -1,9 +1,9 @@
 package biblioteca.library;
 
+import biblioteca.library.lendableItems.Book;
 import org.junit.Test;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class LibraryTest {
 
@@ -12,6 +12,7 @@ public class LibraryTest {
         LendableList available = mock(LendableList.class);
         LendableList checkedOut = mock(LendableList.class);
         Library library = new Library(available, checkedOut);
+        when(available.findByName("Book Name")).thenReturn(mock(Book.class));
         library.getAvailableBookByName("Book Name");
         verify(available).findByName("Book Name");
     }
@@ -21,6 +22,7 @@ public class LibraryTest {
         LendableList available = mock(LendableList.class);
         LendableList checkedOut = mock(LendableList.class);
         Library library = new Library(available, checkedOut);
+        when(checkedOut.findByName("Book Name")).thenReturn(mock(Book.class));
         library.getCheckedOutBookByName("Book Name");
         verify(checkedOut).findByName("Book Name");
     }
@@ -31,7 +33,7 @@ public class LibraryTest {
         LendableList checkedOut = mock(LendableList.class);
         Library library = new Library(available, checkedOut);
         Book book = mock(Book.class);
-        library.checkoutBook(book);
+        library.checkoutLendable(book);
         verify(available).move(checkedOut, book);
     }
 
@@ -41,7 +43,7 @@ public class LibraryTest {
         LendableList checkedOut = mock(LendableList.class);
         Library library = new Library(available, checkedOut);
         Book book = mock(Book.class);
-        library.returnBook(book);
+        library.returnLendable(book);
         verify(checkedOut).move(available, book);
     }
 }

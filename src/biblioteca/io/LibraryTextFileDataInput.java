@@ -1,8 +1,8 @@
 package biblioteca.io;
 
-import biblioteca.library.Book;
 import biblioteca.library.LendableList;
-import biblioteca.library.Movie;
+import biblioteca.library.lendableItems.Book;
+import biblioteca.library.lendableItems.Movie;
 
 import java.io.BufferedReader;
 import java.io.IOException;

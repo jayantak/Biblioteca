@@ -1,13 +1,13 @@
-package biblioteca.library.menuCommands;
+package biblioteca.library.menuOptions;
 
 import biblioteca.io.UserIO;
-import biblioteca.library.Book;
-import biblioteca.library.Lendable;
 import biblioteca.library.LendableList;
 import biblioteca.library.Library;
+import biblioteca.library.lendableItems.Book;
+import biblioteca.library.lendableItems.Lendable;
 
 //Understands how to list the books
-public class ListBooks implements LibraryFunction {
+public class ListBooks implements MenuOption {
 
     private UserIO userIO;
     private Library library;
@@ -20,8 +20,7 @@ public class ListBooks implements LibraryFunction {
     @Override
     public boolean run() {
         LendableList toPrint = new LendableList();
-        for (Lendable lendable :
-                library.available()) {
+        for (Lendable lendable : library.available()) {
             if (lendable.getClass() != Book.class) {
                 continue;
             }

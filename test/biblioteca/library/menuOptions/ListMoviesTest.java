@@ -1,10 +1,10 @@
-package biblioteca.library.menuCommands;
+package biblioteca.library.menuOptions;
 
 import biblioteca.io.ConsoleIO;
 import biblioteca.io.UserIO;
 import biblioteca.library.LendableList;
 import biblioteca.library.Library;
-import biblioteca.library.Movie;
+import biblioteca.library.lendableItems.Movie;
 import org.junit.Test;
 
 import static org.mockito.Mockito.*;
@@ -15,15 +15,15 @@ public class ListMoviesTest {
     public void shouldPrintMovieList() {
         UserIO userIO = mock(ConsoleIO.class);
         Library library = mock(Library.class);
-        LendableList items = mock(LendableList.class);
-        Movie movie = mock(Movie.class);
+        LendableList items = new LendableList();
+        Movie movie = new Movie("", "", 0, 0);
+        items.add(movie);
 
-        ListBooks listBooks = new ListBooks(userIO, library);
+        ListMovies listMovies = new ListMovies(userIO, library);
 
         when(library.available()).thenReturn(items);
-        when(items.get(0)).thenReturn(movie);
 
-        listBooks.run();
+        listMovies.run();
 
         verify(userIO).printList(items, "%50s %30s %15s %15s\n");
     }

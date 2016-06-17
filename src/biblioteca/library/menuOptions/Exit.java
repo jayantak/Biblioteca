@@ -1,7 +1,7 @@
-package biblioteca.library.menuCommands;
+package biblioteca.library.menuOptions;
 
 //Understands how to exit the menu
-public class Exit implements LibraryFunction {
+public class Exit implements MenuOption {
 
     @Override
     public boolean run() {

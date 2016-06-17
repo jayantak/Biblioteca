@@ -1,12 +1,12 @@
-package biblioteca.library.menuCommands;
+package biblioteca.library.menuOptions;
 
 import biblioteca.io.UserIO;
-import biblioteca.library.Lendable;
 import biblioteca.library.LendableList;
 import biblioteca.library.Library;
-import biblioteca.library.Movie;
+import biblioteca.library.lendableItems.Lendable;
+import biblioteca.library.lendableItems.Movie;
 
-public class ListMovies implements LibraryFunction {
+public class ListMovies implements MenuOption {
 
     private UserIO userIO;
     private Library library;

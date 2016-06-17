@@ -1,7 +1,7 @@
 package biblioteca.io;
 
-import biblioteca.library.Book;
 import biblioteca.library.LendableList;
+import biblioteca.library.lendableItems.Book;
 import org.junit.Test;
 
 import java.io.BufferedReader;

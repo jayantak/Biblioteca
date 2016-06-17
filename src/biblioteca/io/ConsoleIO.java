@@ -1,10 +1,9 @@
 package biblioteca.io;
 
-import biblioteca.library.Lendable;
 import biblioteca.library.LendableList;
+import biblioteca.library.lendableItems.Lendable;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,14 +23,13 @@ public class ConsoleIO implements UserIO {
 
     @Override
     public void printList(LendableList lendableList, String format) {
-        System.out.println("\nAvailable books : ");
         for (Lendable lendable : lendableList) {
             System.out.println(lendable.toString(format));
         }
     }
 
     @Override
-    public int mainMenu(List<String> menuItems) {
+    public int menu(List<String> menuItems) {
         System.out.println("" +
                 "Choose option: ");
         int i = 0;
@@ -53,7 +51,7 @@ public class ConsoleIO implements UserIO {
     }
 
     @Override
-    public String inputBookTitle() {
+    public String inputTitle() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }

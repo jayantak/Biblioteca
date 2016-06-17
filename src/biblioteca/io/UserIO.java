@@ -10,9 +10,9 @@ public interface UserIO {
 
     void printList(LendableList lendableList, String format);
 
-    int mainMenu(List<String> menuItems);
+    int menu(List<String> menuItems);
 
     void invalidOption();
 
-    String inputBookTitle();
+    String inputTitle();
 }

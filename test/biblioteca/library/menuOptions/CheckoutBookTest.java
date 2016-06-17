@@ -1,8 +1,8 @@
-package biblioteca.library.menuCommands;
+package biblioteca.library.menuOptions;
 
 import biblioteca.io.UserIO;
-import biblioteca.library.Book;
 import biblioteca.library.Library;
+import biblioteca.library.lendableItems.Book;
 import org.junit.Test;
 
 import static org.mockito.Mockito.*;
@@ -15,7 +15,7 @@ public class CheckoutBookTest {
         Library library = mock(Library.class);
         CheckoutBook checkoutBook = new CheckoutBook(userIO, library);
         Book book = mock(Book.class);
-        when(userIO.inputBookTitle()).thenReturn("Book");
+        when(userIO.inputTitle()).thenReturn("Book");
         when(library.getCheckedOutBookByName("Book")).thenReturn(book);
 
         checkoutBook.run();
@@ -29,13 +29,13 @@ public class CheckoutBookTest {
         Library library = mock(Library.class);
         CheckoutBook checkoutBook = new CheckoutBook(userIO, library);
         Book book = mock(Book.class);
-        when(userIO.inputBookTitle()).thenReturn("Book");
+        when(userIO.inputTitle()).thenReturn("Book");
         when(library.getCheckedOutBookByName("Book")).thenReturn(null);
         when(library.getAvailableBookByName("Book")).thenReturn(book);
 
         checkoutBook.run();
 
-        verify(library).checkoutBook(book);
+        verify(library).checkoutLendable(book);
         verify(userIO).display("Thank you! Enjoy the book!");
     }
 
@@ -45,7 +45,7 @@ public class CheckoutBookTest {
         Library library = mock(Library.class);
         CheckoutBook checkoutBook = new CheckoutBook(userIO, library);
         Book book = mock(Book.class);
-        when(userIO.inputBookTitle()).thenReturn("Book");
+        when(userIO.inputTitle()).thenReturn("Book");
         when(library.getCheckedOutBookByName("Book")).thenReturn(null);
         when(library.getAvailableBookByName("Book")).thenReturn(null);
 

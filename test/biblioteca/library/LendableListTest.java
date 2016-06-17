@@ -1,5 +1,6 @@
 package biblioteca.library;
 
+import biblioteca.library.lendableItems.Book;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

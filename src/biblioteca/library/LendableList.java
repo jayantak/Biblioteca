@@ -1,5 +1,7 @@
 package biblioteca.library;
 
+import biblioteca.library.lendableItems.Lendable;
+
 import java.util.ArrayList;
 
 //Understands manipulation of a set of books

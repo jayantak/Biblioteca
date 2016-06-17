@@ -1,8 +1,8 @@
-package biblioteca.library.menuCommands;
+package biblioteca.library.menuOptions;
 
 import biblioteca.io.UserIO;
 
-public class PrintInvalid implements LibraryFunction {
+public class PrintInvalid implements MenuOption {
 
     private UserIO userIO;
 

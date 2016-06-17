@@ -1,4 +1,4 @@
-package biblioteca.library;
+package biblioteca.library.lendableItems;
 
 //Understands the properties of a written novel
 public class Book implements Lendable {

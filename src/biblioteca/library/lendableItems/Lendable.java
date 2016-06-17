@@ -1,4 +1,4 @@
-package biblioteca.library;
+package biblioteca.library.lendableItems;
 
 public interface Lendable {
 
