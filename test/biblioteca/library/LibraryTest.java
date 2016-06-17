@@ -3,6 +3,7 @@ package biblioteca.library;
 import biblioteca.library.lendableItems.Book;
 import org.junit.Test;
 
+import static biblioteca.library.user.User.NO_USER;
 import static org.mockito.Mockito.*;
 
 public class LibraryTest {
@@ -33,8 +34,8 @@ public class LibraryTest {
         LendableList checkedOut = mock(LendableList.class);
         Library library = new Library(available, checkedOut);
         Book book = mock(Book.class);
-        library.checkoutLendable(book);
-        verify(available).move(checkedOut, book);
+        library.checkoutLendable(book, NO_USER);
+        verify(available).move(checkedOut, book, NO_USER);
     }
 
     @Test
@@ -43,7 +44,7 @@ public class LibraryTest {
         LendableList checkedOut = mock(LendableList.class);
         Library library = new Library(available, checkedOut);
         Book book = mock(Book.class);
-        library.returnLendable(book);
-        verify(checkedOut).move(available, book);
+        library.returnLendable(book, NO_USER);
+        verify(checkedOut).move(available, book, NO_USER);
     }
 }

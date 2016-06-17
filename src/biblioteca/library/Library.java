@@ -3,22 +3,21 @@ package biblioteca.library;
 import biblioteca.library.lendableItems.Book;
 import biblioteca.library.lendableItems.Lendable;
 import biblioteca.library.lendableItems.Movie;
-import biblioteca.library.user.UserList;
+import biblioteca.library.user.User;
 
 //Understands lending and returning of books
 public class Library {
 
     private LendableList available;
     private LendableList checkedOut;
-    private UserList users;
 
     public Library(LendableList available, LendableList checkedOut) {
         this.available = available;
         this.checkedOut = checkedOut;
     }
 
-    public void checkoutLendable(Lendable foundLendable) {
-        available.move(checkedOut, foundLendable);
+    public void checkoutLendable(Lendable foundLendable, User user) {
+        available.move(checkedOut, foundLendable, user);
     }
 
     public Lendable getAvailableBookByName(String bookTitle) {
@@ -29,8 +28,8 @@ public class Library {
         return found;
     }
 
-    public void returnLendable(Lendable foundLendable) {
-        checkedOut.move(available, foundLendable);
+    public void returnLendable(Lendable foundLendable, User user) {
+        checkedOut.move(available, foundLendable, user);
     }
 
     public Lendable getCheckedOutBookByName(String bookTitle) {

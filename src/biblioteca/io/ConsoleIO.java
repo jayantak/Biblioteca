@@ -1,7 +1,6 @@
 package biblioteca.io;
 
 import biblioteca.library.LendableList;
-import biblioteca.library.lendableItems.Lendable;
 
 import java.io.BufferedReader;
 import java.util.List;
@@ -23,9 +22,7 @@ public class ConsoleIO implements UserIO {
 
     @Override
     public void printList(LendableList lendableList, String format) {
-        for (Lendable lendable : lendableList) {
-            System.out.println(lendable.toString(format));
-        }
+        lendableList.forEach((lendable, user) -> System.out.println(lendable.toString(format)));
     }
 
     @Override
@@ -51,7 +48,7 @@ public class ConsoleIO implements UserIO {
     }
 
     @Override
-    public String inputTitle() {
+    public String inputLine() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }

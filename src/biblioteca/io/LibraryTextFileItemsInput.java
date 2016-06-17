@@ -9,12 +9,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static biblioteca.library.user.User.NO_USER;
+
 //Understands input of books from file
-public class LibraryTextFileDataInput implements LibraryDataInput {
+public class LibraryTextFileItemsInput implements LibraryDataInput {
 
     private BufferedReader bufferedReader;
 
-    public LibraryTextFileDataInput(BufferedReader bufferedReader) {
+    public LibraryTextFileItemsInput(BufferedReader bufferedReader) {
         this.bufferedReader = bufferedReader;
     }
 
@@ -32,13 +34,12 @@ public class LibraryTextFileDataInput implements LibraryDataInput {
         for (String data : lendableListStrings) {
             String[] metaData = data.split(",");
             if (metaData.length == 3) {
-                lendableList.add(new Book(metaData[0], metaData[1], Integer.parseInt(metaData[2])));
+                lendableList.put(new Book(metaData[0], metaData[1], Integer.parseInt(metaData[2])), NO_USER);
             }
             if (metaData.length == 4) {
-                lendableList.add(new Movie(metaData[0], metaData[1], Integer.parseInt(metaData[2]), Integer.parseInt(metaData[3])));
+                lendableList.put(new Movie(metaData[0], metaData[1], Integer.parseInt(metaData[2]), Integer.parseInt(metaData[3])), NO_USER);
             }
         }
         return lendableList;
     }
-
 }

@@ -5,6 +5,7 @@ import biblioteca.io.UserIO;
 import biblioteca.library.LendableList;
 import biblioteca.library.Library;
 import biblioteca.library.lendableItems.Book;
+import biblioteca.library.user.User;
 import org.junit.Test;
 
 import static org.mockito.Mockito.*;
@@ -17,7 +18,7 @@ public class ListBooksTest {
         Library library = mock(Library.class);
         LendableList books = new LendableList();
         Book book = new Book("", "", 0);
-        books.add(book);
+        books.put(book, User.NO_USER);
 
         ListBooks listBooks = new ListBooks(userIO, library);
 

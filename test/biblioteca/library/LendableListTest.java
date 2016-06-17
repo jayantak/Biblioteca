@@ -1,6 +1,7 @@
 package biblioteca.library;
 
 import biblioteca.library.lendableItems.Book;
+import biblioteca.library.user.User;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -13,8 +14,8 @@ public class LendableListTest {
 
         Book book = new Book("Book Name", "Author Name", 1999);
         Book anotherBook = new Book("Another", "Author Name", 1999);
-        books.add(book);
-        books.add(anotherBook);
+        books.put(book, User.NO_USER);
+        books.put(anotherBook, User.NO_USER);
 
         assertEquals(book, books.findByName("Book Name"));
     }
@@ -24,7 +25,7 @@ public class LendableListTest {
         LendableList books = new LendableList();
 
         Book book = new Book("Book Name", "Author Name", 1999);
-        books.add(book);
+        books.put(book, User.NO_USER);
 
         assertEquals(null, books.findByName("Another"));
     }

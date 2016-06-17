@@ -2,6 +2,7 @@ package biblioteca.io;
 
 import biblioteca.library.LendableList;
 import biblioteca.library.lendableItems.Book;
+import biblioteca.library.user.User;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -11,16 +12,16 @@ import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class LibraryTextFileDataInputTest {
+public class LibraryTextFileItemsInputTest {
 
     @Test
     public void scanOfInputBookFileShouldConstructBookList() throws IOException {
         BufferedReader fileInput = mock(BufferedReader.class);
-        LibraryDataInput libraryDataInput = new LibraryTextFileDataInput(fileInput);
+        LibraryDataInput libraryDataInput = new LibraryTextFileItemsInput(fileInput);
         when(fileInput.readLine()).thenReturn("The Book Thief,Marcus Zusak,2006").thenReturn(null);
 
         LendableList books = new LendableList();
-        books.add(new Book("The Book Thief", "Marcus Zusak", 2006));
-        assertEquals(books, libraryDataInput.getBookList());
+        books.put(new Book("The Book Thief", "Marcus Zusak", 2006), User.NO_USER);
+        assertEquals(books.get(0), libraryDataInput.getBookList().get(0));
     }
 }

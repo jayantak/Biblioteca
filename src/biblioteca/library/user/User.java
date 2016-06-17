@@ -2,6 +2,7 @@ package biblioteca.library.user;
 
 public class User {
 
+    public static final User NO_USER = new User("", "");
     private final String name;
     private final String password;
 

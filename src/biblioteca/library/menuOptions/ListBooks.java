@@ -5,6 +5,7 @@ import biblioteca.library.LendableList;
 import biblioteca.library.Library;
 import biblioteca.library.lendableItems.Book;
 import biblioteca.library.lendableItems.Lendable;
+import biblioteca.library.user.User;
 
 //Understands how to list the books
 public class ListBooks implements MenuOption {
@@ -20,11 +21,11 @@ public class ListBooks implements MenuOption {
     @Override
     public boolean run() {
         LendableList toPrint = new LendableList();
-        for (Lendable lendable : library.available()) {
+        for (Lendable lendable : library.available().keySet()) {
             if (lendable.getClass() != Book.class) {
                 continue;
             }
-            toPrint.add(lendable);
+            toPrint.put(lendable, User.NO_USER);
         }
 
         userIO.printList(toPrint, "%50s %30s %15s\n");
