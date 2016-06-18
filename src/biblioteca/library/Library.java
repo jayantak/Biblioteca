@@ -8,20 +8,20 @@ import biblioteca.library.user.User;
 //Understands lending and returning of books
 public class Library {
 
-    private LendableList available;
+    private LendableList inventory;
     private LendableList checkedOut;
 
-    public Library(LendableList available, LendableList checkedOut) {
-        this.available = available;
+    public Library(LendableList inventory, LendableList checkedOut) {
+        this.inventory = inventory;
         this.checkedOut = checkedOut;
     }
 
     public void checkoutLendable(Lendable foundLendable, User user) {
-        available.move(checkedOut, foundLendable, user);
+        inventory.move(checkedOut, foundLendable, user);
     }
 
     public Lendable getAvailableBookByName(String bookTitle) {
-        Lendable found = available.findByName(bookTitle);
+        Lendable found = inventory.findByName(bookTitle);
         if (found.getClass() != Book.class) {
             return null;
         }
@@ -29,11 +29,11 @@ public class Library {
     }
 
     public void returnLendable(Lendable foundLendable, User user) {
-        checkedOut.move(available, foundLendable, user);
+        checkedOut.move(inventory, foundLendable, user);
     }
 
     public Lendable getCheckedOutBookByName(String bookTitle) {
-        Lendable found = checkedOut.findByName(bookTitle);
+        Lendable found = inventory.findByName(bookTitle);
         if (found.getClass() != Book.class) {
             return null;
         }
@@ -41,7 +41,7 @@ public class Library {
     }
 
     public LendableList available() {
-        return available;
+        return inventory;
     }
 
     public Lendable getCheckedOutMovieByName(String title) {
@@ -53,7 +53,7 @@ public class Library {
     }
 
     public Lendable getAvailableMovieByName(String bookTitle) {
-        Lendable found = available.findByName(bookTitle);
+        Lendable found = inventory.findByName(bookTitle);
         if (found.getClass() != Movie.class) {
             return null;
         }

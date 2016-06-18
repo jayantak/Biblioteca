@@ -4,7 +4,6 @@ import biblioteca.library.Library;
 import biblioteca.library.menuFunctions.MenuInput;
 import biblioteca.library.menuFunctions.Start;
 import biblioteca.library.menuOptions.*;
-import biblioteca.library.user.User;
 import biblioteca.library.user.UserAuthenticator;
 
 import java.io.BufferedReader;
@@ -28,13 +27,12 @@ class Biblioteca {
         UserIO userIO = createUserIO();
         UserAuthenticator userAuthenticator = createUserAuthenticator();
 
-        Menu menu = createMenu(userIO, library, userAuthenticator);
+        Menu menu = createMainMenu(userIO, library, userAuthenticator);
 
         menu.run();
     }
 
     private UserAuthenticator createUserAuthenticator() throws FileNotFoundException {
-        List<User> userList = new ArrayList<>();
         String pathname = System.getProperty("user.dir") + libraryName + "libraryMembers.users";
         BufferedReader userDataReader = new BufferedReader(new FileReader(pathname));
         LibraryTextFileUsersInput libraryTextFileUsersInput = new LibraryTextFileUsersInput(userDataReader);
@@ -55,22 +53,22 @@ class Biblioteca {
         return new Library(libraryDataInput.getBookList(), new LendableList());
     }
 
-    private Menu createMenu(UserIO userIO, Library library, UserAuthenticator userAuthenticator) {
+    private Menu createMainMenu(UserIO userIO, Library library, UserAuthenticator userAuthenticator) {
 
         Start start = new Start(userIO, "Welcome to Biblioteca!");
         MenuInput menuInput = new MenuInput(userIO);
-        List<MenuOption> options = new ArrayList<>();
-        options.add(new Exit());
-        options.add(new Login(userIO, userAuthenticator));
-        options.add(new ListBooks(userIO, library));
-        options.add(new ListMovies(userIO, library));
-        options.add(new CheckoutBook(userIO, library, userAuthenticator));
-        options.add(new ReturnBook(userIO, library, userAuthenticator));
-        options.add(new CheckoutMovie(userIO, library, userAuthenticator));
-        options.add(new ReturnMovie(userIO, library, userAuthenticator));
+        List<MenuOption> mainMenuOptions = new ArrayList<>();
+        mainMenuOptions.add(new Exit());
+        mainMenuOptions.add(new Login(userIO, userAuthenticator));
+        mainMenuOptions.add(new ListBooks(userIO, library));
+        mainMenuOptions.add(new ListMovies(userIO, library));
+        mainMenuOptions.add(new CheckoutBook(userIO, library, userAuthenticator));
+        mainMenuOptions.add(new ReturnBook(userIO, library, userAuthenticator));
+        mainMenuOptions.add(new CheckoutMovie(userIO, library, userAuthenticator));
+        mainMenuOptions.add(new ReturnMovie(userIO, library, userAuthenticator));
         MenuOption invalid = new PrintInvalid(userIO);
 
-        return new Menu(start, menuInput, options, invalid, "Main Menu");
+        return new Menu(start, menuInput, mainMenuOptions, invalid, "Main Menu");
     }
 
 }
