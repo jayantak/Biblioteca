@@ -7,6 +7,8 @@ import biblioteca.library.lendableItems.Book;
 import biblioteca.library.lendableItems.Lendable;
 import biblioteca.library.user.User;
 
+import java.util.Map;
+
 //Understands how to list the books
 public class ListBooks implements MenuOption {
 
@@ -18,14 +20,21 @@ public class ListBooks implements MenuOption {
         this.library = library;
     }
 
+    public boolean accessRestricted() {
+        return true;
+    }
+
     @Override
     public boolean run() {
         LendableList toPrint = new LendableList();
-        for (Lendable lendable : library.available().keySet()) {
-            if (lendable.getClass() != Book.class) {
+        for (Map.Entry<Lendable, User> lendable : library.available().entrySet()) {
+            if (lendable.getKey().getClass() != Book.class) {
                 continue;
             }
-            toPrint.put(lendable, User.NO_USER);
+            if (lendable.getValue() != User.NO_USER) {
+                continue;
+            }
+            toPrint.put(lendable.getKey(), User.NO_USER);
         }
 
         userIO.printList(toPrint, "%50s %30s %15s\n");

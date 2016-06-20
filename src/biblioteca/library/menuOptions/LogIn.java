@@ -4,14 +4,18 @@ import biblioteca.io.UserIO;
 import biblioteca.library.user.User;
 import biblioteca.library.user.UserAuthenticator;
 
-public class Login implements MenuOption {
+public class LogIn implements MenuOption {
 
     private UserIO userIO;
     private UserAuthenticator userAuthenticator;
 
-    public Login(UserIO userIO, UserAuthenticator userAuthenticator) {
+    public LogIn(UserIO userIO, UserAuthenticator userAuthenticator) {
         this.userIO = userIO;
         this.userAuthenticator = userAuthenticator;
+    }
+
+    public boolean accessRestricted() {
+        return true;
     }
 
     @Override

@@ -2,6 +2,7 @@ package biblioteca.library.menuOptions;
 
 import biblioteca.io.UserIO;
 import biblioteca.library.Library;
+import biblioteca.library.lendableItems.Lendable;
 import biblioteca.library.lendableItems.Movie;
 import biblioteca.library.user.UserAuthenticator;
 import org.junit.Test;
@@ -32,8 +33,8 @@ public class CheckoutMovieTest {
         UserAuthenticator userAuthenticator = mock(UserAuthenticator.class);
         CheckoutMovie checkoutMovie = new CheckoutMovie(userIO, library, userAuthenticator);
         when(userIO.inputLine()).thenReturn("Movie");
-        when(library.getCheckedOutMovieByName("Movie")).thenReturn(null);
-        when(library.getAvailableMovieByName("Movie")).thenReturn(null);
+        when(library.getCheckedOutMovieByName("Movie")).thenReturn(Lendable.NO_LENDABLE);
+        when(library.getAvailableMovieByName("Movie")).thenReturn(Lendable.NO_LENDABLE);
 
         checkoutMovie.run();
 

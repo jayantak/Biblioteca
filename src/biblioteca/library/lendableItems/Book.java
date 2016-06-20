@@ -3,6 +3,7 @@ package biblioteca.library.lendableItems;
 //Understands the properties of a written novel
 public class Book implements Lendable {
 
+    public static final Book NO_BOOK = new Book("", "", 0);
     private final String name;
     private final String author;
     private final int yearPublished;

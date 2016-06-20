@@ -18,17 +18,25 @@ public class CheckoutBook implements MenuOption {
         this.userAuthenticator = userAuthenticator;
     }
 
+    public boolean accessRestricted() {
+        return userAuthenticator.loggedIn();
+    }
+
     @Override
     public boolean run() {
-        userIO.display("Enter title of book to checkoutLendable: ");
+        if(!userAuthenticator.loggedIn()) {
+            userIO.display("Log in to access member functionality");
+            return true;
+        }
+        userIO.display("Enter title of book to checkout: ");
         String bookTitle = userIO.inputLine();
         Lendable foundBook = library.getCheckedOutBookByName(bookTitle);
-        if (foundBook != null) {
+        if (foundBook != Lendable.NO_LENDABLE) {
             userIO.display("Sorry that book is checked out!");
             return true;
         }
         foundBook = library.getAvailableBookByName(bookTitle);
-        if (foundBook != null) {
+        if (foundBook != Lendable.NO_LENDABLE) {
             library.checkoutLendable(foundBook, userAuthenticator.getCurrentUser());
             userIO.display("Thank you! Enjoy the book!");
             return true;

@@ -3,6 +3,7 @@ package biblioteca.library.menuOptions;
 import biblioteca.io.UserIO;
 import biblioteca.library.Library;
 import biblioteca.library.lendableItems.Book;
+import biblioteca.library.lendableItems.Lendable;
 import biblioteca.library.user.User;
 import biblioteca.library.user.UserAuthenticator;
 import org.junit.Test;
@@ -20,6 +21,7 @@ public class CheckoutBookTest {
         Book book = mock(Book.class);
         when(userIO.inputLine()).thenReturn("Book");
         when(library.getCheckedOutBookByName("Book")).thenReturn(book);
+        when(userAuthenticator.loggedIn()).thenReturn(true);
 
         checkoutBook.run();
 
@@ -35,9 +37,10 @@ public class CheckoutBookTest {
         CheckoutBook checkoutBook = new CheckoutBook(userIO, library, userAuthenticator);
         Book book = mock(Book.class);
         when(userIO.inputLine()).thenReturn("Book");
-        when(library.getCheckedOutBookByName("Book")).thenReturn(null);
+        when(library.getCheckedOutBookByName("Book")).thenReturn(Lendable.NO_LENDABLE);
         when(library.getAvailableBookByName("Book")).thenReturn(book);
         when(userAuthenticator.getCurrentUser()).thenReturn(user);
+        when(userAuthenticator.loggedIn()).thenReturn(true);
 
         checkoutBook.run();
 
@@ -53,8 +56,9 @@ public class CheckoutBookTest {
         CheckoutBook checkoutBook = new CheckoutBook(userIO, library, userAuthenticator);
         Book book = mock(Book.class);
         when(userIO.inputLine()).thenReturn("Book");
-        when(library.getCheckedOutBookByName("Book")).thenReturn(null);
-        when(library.getAvailableBookByName("Book")).thenReturn(null);
+        when(library.getCheckedOutBookByName("Book")).thenReturn(Lendable.NO_LENDABLE);
+        when(library.getAvailableBookByName("Book")).thenReturn(Lendable.NO_LENDABLE);
+        when(userAuthenticator.loggedIn()).thenReturn(true);
 
         checkoutBook.run();
 

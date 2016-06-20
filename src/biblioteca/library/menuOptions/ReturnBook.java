@@ -18,17 +18,21 @@ public class ReturnBook implements MenuOption {
         this.userAuthenticator = userAuthenticator;
     }
 
+    public boolean accessRestricted() {
+        return userAuthenticator.loggedIn();
+    }
+
     @Override
     public boolean run() {
         userIO.display("Enter title of book to return: ");
         String bookTitle = userIO.inputLine();
         Lendable foundBook = library.getAvailableBookByName(bookTitle);
-        if (foundBook != null) {
+        if (foundBook != Lendable.NO_LENDABLE) {
             userIO.display("That book has not been checked out!");
             return true;
         }
         foundBook = library.getCheckedOutBookByName(bookTitle);
-        if (foundBook != null) {
+        if (foundBook != Lendable.NO_LENDABLE) {
             library.returnLendable(foundBook, userAuthenticator.getCurrentUser());
             userIO.display("Thank you for returning the book!");
             return true;

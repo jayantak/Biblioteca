@@ -4,8 +4,8 @@ import java.util.List;
 
 public class UserAuthenticator {
 
-    User currentUser;
-    List<User> users;
+    private User currentUser;
+    private List<User> users;
 
     public UserAuthenticator(List<User> users) {
         this.currentUser = User.NO_USER;
@@ -22,5 +22,9 @@ public class UserAuthenticator {
         }
         currentUser = user;
         return true;
+    }
+
+    public boolean loggedIn() {
+        return currentUser != User.NO_USER;
     }
 }

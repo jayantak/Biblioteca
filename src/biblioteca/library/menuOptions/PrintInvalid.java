@@ -10,6 +10,10 @@ public class PrintInvalid implements MenuOption {
         this.userIO = userIO;
     }
 
+    public boolean accessRestricted() {
+        return true;
+    }
+
     @Override
     public boolean run() {
         userIO.invalidOption();

@@ -1,6 +1,7 @@
 package biblioteca.library;
 
 import biblioteca.library.lendableItems.Book;
+import biblioteca.library.lendableItems.Lendable;
 import biblioteca.library.user.User;
 import org.junit.Test;
 
@@ -27,6 +28,6 @@ public class LendableListTest {
         Book book = new Book("Book Name", "Author Name", 1999);
         books.put(book, User.NO_USER);
 
-        assertEquals(null, books.findByName("Another"));
+        assertEquals(Lendable.NO_LENDABLE, books.findByName("Another"));
     }
 }

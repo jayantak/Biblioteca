@@ -8,6 +8,10 @@ public class Exit implements MenuOption {
         return false;
     }
 
+    public boolean accessRestricted() {
+        return true;
+    }
+
     @Override
     public String toString() {
         return "Exit";

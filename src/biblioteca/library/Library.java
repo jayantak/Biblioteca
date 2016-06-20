@@ -23,7 +23,7 @@ public class Library {
     public Lendable getAvailableBookByName(String bookTitle) {
         Lendable found = inventory.findByName(bookTitle);
         if (found.getClass() != Book.class) {
-            return null;
+            return Lendable.NO_LENDABLE;
         }
         return found;
     }
@@ -33,9 +33,9 @@ public class Library {
     }
 
     public Lendable getCheckedOutBookByName(String bookTitle) {
-        Lendable found = inventory.findByName(bookTitle);
+        Lendable found = checkedOut.findByName(bookTitle);
         if (found.getClass() != Book.class) {
-            return null;
+            return Lendable.NO_LENDABLE;
         }
         return found;
     }
@@ -47,7 +47,7 @@ public class Library {
     public Lendable getCheckedOutMovieByName(String title) {
         Lendable found = checkedOut.findByName(title);
         if (found.getClass() != Movie.class) {
-            return null;
+            return Lendable.NO_LENDABLE;
         }
         return found;
     }
@@ -55,7 +55,7 @@ public class Library {
     public Lendable getAvailableMovieByName(String bookTitle) {
         Lendable found = inventory.findByName(bookTitle);
         if (found.getClass() != Movie.class) {
-            return null;
+            return Lendable.NO_LENDABLE;
         }
         return found;
     }

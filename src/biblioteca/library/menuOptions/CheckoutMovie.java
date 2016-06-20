@@ -17,17 +17,21 @@ public class CheckoutMovie implements MenuOption {
         this.userAuthenticator = userAuthenticator;
     }
 
+    public boolean accessRestricted() {
+        return userAuthenticator.loggedIn();
+    }
+
     @Override
     public boolean run() {
         userIO.display("Enter title of movie to checkout: ");
         String title = userIO.inputLine();
         Lendable foundMovie = library.getCheckedOutMovieByName(title);
-        if (foundMovie != null) {
+        if (foundMovie != Lendable.NO_LENDABLE) {
             userIO.display("Sorry that movie is checked out!");
             return true;
         }
         foundMovie = library.getAvailableMovieByName(title);
-        if (foundMovie != null) {
+        if (foundMovie != Lendable.NO_LENDABLE) {
             library.checkoutLendable(foundMovie, userAuthenticator.getCurrentUser());
             userIO.display("Thank you! Enjoy the movie!");
             return true;

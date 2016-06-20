@@ -2,6 +2,8 @@ package biblioteca.library.lendableItems;
 
 public class Movie implements Lendable {
 
+    public static final Movie NO_MOVIE = new Movie("", "", 0, 0);
+
     private final String name;
     private final String director;
     private final int year;

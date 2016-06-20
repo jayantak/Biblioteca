@@ -23,6 +23,10 @@ public class Menu implements MenuOption {
         this.menuTitle = menuTitle;
     }
 
+    public boolean accessRestricted() {
+        return true;
+    }
+
     @Override
     public boolean run() {
         start.print();
@@ -33,11 +37,11 @@ public class Menu implements MenuOption {
     private void mainMenu() {
         boolean restart = true;
 
-        List<String> menuItems = options.stream()
-                .map(Object::toString)
-                .collect(Collectors.toList());
-
         while (restart) {
+            List<String> menuItems = options.stream()
+                    .filter(MenuOption::accessRestricted)
+                    .map(Object::toString)
+                    .collect(Collectors.toList());
             MenuOption menuOption = getCommand(menuItems);
             restart = menuOption.run();
         }
