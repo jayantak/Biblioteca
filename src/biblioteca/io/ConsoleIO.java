@@ -31,7 +31,7 @@ public class ConsoleIO implements UserIO {
                 "Choose option: ");
         int i = 0;
         for (String item : menuItems) {
-            System.out.println("\n" + i++ + ". " + item);
+            System.out.println("" + i++ + ". " + item);
         }
         int option = -1;
         try {
@@ -51,5 +51,10 @@ public class ConsoleIO implements UserIO {
     public String inputLine() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
+    }
+
+    @Override
+    public void clear() {
+        System.out.flush();
     }
 }

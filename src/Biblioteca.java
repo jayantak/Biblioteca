@@ -54,8 +54,21 @@ class Biblioteca {
 
     private Menu createMainMenu(UserIO userIO, Library library, UserAuthenticator userAuthenticator) {
 
-        Start mainStart = new Start(userIO, "Welcome to Biblioteca!");
+        MenuOption invalid = new PrintInvalid(userIO);
         MenuInput menuInput = new MenuInput(userIO);
+
+
+        List<MenuOption> checkoutOptions = new ArrayList<>();
+        checkoutOptions.add(new Exit());
+        checkoutOptions.add(new CheckoutBook(userIO, library, userAuthenticator));
+        checkoutOptions.add(new CheckoutMovie(userIO, library, userAuthenticator));
+        Menu checkoutMenu = new Menu(new Start(userIO, "Checkout"), menuInput, checkoutOptions, invalid, "Checkout", true, userAuthenticator);
+
+        List<MenuOption> returnOptions = new ArrayList<>();
+        returnOptions.add(new Exit());
+        returnOptions.add(new ReturnBook(userIO, library, userAuthenticator));
+        returnOptions.add(new ReturnMovie(userIO, library, userAuthenticator));
+        Menu returnMenu = new Menu(new Start(userIO, "Return"), menuInput, returnOptions, invalid, "Return", true, userAuthenticator);
 
         List<MenuOption> mainMenuOptions = new ArrayList<>();
         mainMenuOptions.add(new Exit());
@@ -64,13 +77,9 @@ class Biblioteca {
         mainMenuOptions.add(new UserDetails(userIO, userAuthenticator));
         mainMenuOptions.add(new ListBooks(userIO, library));
         mainMenuOptions.add(new ListMovies(userIO, library));
-        mainMenuOptions.add(new CheckoutBook(userIO, library, userAuthenticator));
-        mainMenuOptions.add(new ReturnBook(userIO, library, userAuthenticator));
-        mainMenuOptions.add(new CheckoutMovie(userIO, library, userAuthenticator));
-        mainMenuOptions.add(new ReturnMovie(userIO, library, userAuthenticator));
+        mainMenuOptions.add(checkoutMenu);
+        mainMenuOptions.add(returnMenu);
 
-        MenuOption invalid = new PrintInvalid(userIO);
-
-        return new Menu(mainStart, menuInput, mainMenuOptions, invalid, "Main Menu");
+        return new Menu(new Start(userIO, "Welcome to Biblioteca!"), menuInput, mainMenuOptions, invalid, "Main Menu", false, userAuthenticator);
     }
 }

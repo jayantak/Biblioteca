@@ -15,4 +15,6 @@ public interface UserIO {
     void invalidOption();
 
     String inputLine();
+
+    void clear();
 }

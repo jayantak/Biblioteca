@@ -2,6 +2,7 @@ package biblioteca.library.menuOptions;
 
 import biblioteca.library.menuFunctions.MenuInput;
 import biblioteca.library.menuFunctions.Start;
+import biblioteca.library.user.UserAuthenticator;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,16 +15,23 @@ public class Menu implements MenuOption {
     private MenuOption invalid;
     private MenuInput input;
     private String menuTitle;
+    private boolean requiresLogin;
+    private UserAuthenticator userAuthenticator;
 
-    public Menu(Start start, MenuInput input, List<MenuOption> options, MenuOption invalid, String menuTitle) {
+    public Menu(Start start, MenuInput input, List<MenuOption> options, MenuOption invalid, String menuTitle, boolean requiresLogin, UserAuthenticator userAuthenticator) {
         this.start = start;
         this.options = options;
         this.invalid = invalid;
         this.input = input;
         this.menuTitle = menuTitle;
+        this.requiresLogin = requiresLogin;
+        this.userAuthenticator = userAuthenticator;
     }
 
     public boolean accessAvailable() {
+        if (requiresLogin) {
+            return userAuthenticator.loggedIn();
+        }
         return true;
     }
 
@@ -38,7 +46,7 @@ public class Menu implements MenuOption {
         boolean restart = true;
 
         while (restart) {
-            
+
             List<MenuOption> validOptions = options.stream()
                     .filter(MenuOption::accessAvailable)
                     .collect(Collectors.toList());
