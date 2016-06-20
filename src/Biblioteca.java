@@ -54,20 +54,23 @@ class Biblioteca {
 
     private Menu createMainMenu(UserIO userIO, Library library, UserAuthenticator userAuthenticator) {
 
-        Start start = new Start(userIO, "Welcome to Biblioteca!");
+        Start mainStart = new Start(userIO, "Welcome to Biblioteca!");
         MenuInput menuInput = new MenuInput(userIO);
+
         List<MenuOption> mainMenuOptions = new ArrayList<>();
         mainMenuOptions.add(new Exit());
         mainMenuOptions.add(new LogIn(userIO, userAuthenticator));
         mainMenuOptions.add(new LogOut(userAuthenticator));
+        mainMenuOptions.add(new UserDetails(userIO, userAuthenticator));
         mainMenuOptions.add(new ListBooks(userIO, library));
         mainMenuOptions.add(new ListMovies(userIO, library));
         mainMenuOptions.add(new CheckoutBook(userIO, library, userAuthenticator));
         mainMenuOptions.add(new ReturnBook(userIO, library, userAuthenticator));
         mainMenuOptions.add(new CheckoutMovie(userIO, library, userAuthenticator));
         mainMenuOptions.add(new ReturnMovie(userIO, library, userAuthenticator));
+
         MenuOption invalid = new PrintInvalid(userIO);
 
-        return new Menu(start, menuInput, mainMenuOptions, invalid, "Main Menu");
+        return new Menu(mainStart, menuInput, mainMenuOptions, invalid, "Main Menu");
     }
 }

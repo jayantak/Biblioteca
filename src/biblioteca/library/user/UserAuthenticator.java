@@ -20,7 +20,7 @@ public class UserAuthenticator {
         if (!users.contains(user)) {
             return false;
         }
-        currentUser = user;
+        currentUser = users.get(users.indexOf(user));
         return true;
     }
 

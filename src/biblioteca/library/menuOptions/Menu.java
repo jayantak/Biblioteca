@@ -38,20 +38,25 @@ public class Menu implements MenuOption {
         boolean restart = true;
 
         while (restart) {
-            List<String> menuItems = options.stream()
+            
+            List<MenuOption> validOptions = options.stream()
                     .filter(MenuOption::accessAvailable)
+                    .collect(Collectors.toList());
+
+            List<String> menuItems = validOptions.stream()
                     .map(Object::toString)
                     .collect(Collectors.toList());
-            MenuOption menuOption = getCommand(menuItems);
+
+            MenuOption menuOption = getCommand(menuItems, validOptions);
             restart = menuOption.run();
         }
     }
 
-    private MenuOption getCommand(List<String> menuItems) {
+    private MenuOption getCommand(List<String> menuItems, List<MenuOption> validOptions) {
         int choice = input.choice(menuItems);
         MenuOption menuOption;
         try {
-            menuOption = options.get(choice);
+            menuOption = validOptions.get(choice);
         } catch (Exception e) {
             menuOption = invalid;
         }

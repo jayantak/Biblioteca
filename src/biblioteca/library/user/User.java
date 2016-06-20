@@ -2,13 +2,32 @@ package biblioteca.library.user;
 
 public class User {
 
-    public static final User NO_USER = new User("", "");
-    private final String name;
+    public static final User NO_USER = new User("", "", "", "", "");
+    private final String id;
     private final String password;
+    private final String name;
+    private final String email;
+    private final String phone;
 
-    public User(String name, String password) {
-        this.name = name;
+    public User(String id, String password, String name, String email, String phone) {
+        this.id = id;
         this.password = password;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+    }
+
+    public User(String id, String password) {
+        this(id, password, "", "", "");
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phone=" + phone +
+                '}';
     }
 
     @Override
@@ -18,7 +37,7 @@ public class User {
 
         User user = (User) o;
 
-        if (name != null ? !name.equals(user.name) : user.name != null) return false;
+        if (id != null ? !id.equals(user.id) : user.id != null) return false;
         return password != null ? password.equals(user.password) : user.password == null;
 
     }

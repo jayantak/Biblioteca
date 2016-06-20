@@ -16,7 +16,7 @@ public class LogIn implements MenuOption {
 
     @Override
     public boolean accessAvailable() {
-        return true;
+        return !userAuthenticator.loggedIn();
     }
 
     @Override
