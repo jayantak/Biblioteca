@@ -2,7 +2,7 @@ package biblioteca.library.menuOptions;
 
 public class Continue implements MenuOption {
 
-    public boolean accessRestricted() {
+    public boolean accessAvailable() {
         return false;
     }
 

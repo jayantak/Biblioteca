@@ -35,16 +35,16 @@ public class MenuTest {
         input = mock(MenuInput.class);
 
         MenuOption exit = mock(Exit.class);
-        when(exit.accessRestricted()).thenReturn(true);
+        when(exit.accessAvailable()).thenReturn(true);
         options.add(exit);
         MenuOption listBooks = mock(ListBooks.class);
-        when(listBooks.accessRestricted()).thenReturn(true);
+        when(listBooks.accessAvailable()).thenReturn(true);
         options.add(listBooks);
         MenuOption checkoutBook = mock((CheckoutBook.class));
-        when(checkoutBook.accessRestricted()).thenReturn(true);
+        when(checkoutBook.accessAvailable()).thenReturn(true);
         options.add(checkoutBook);
         ReturnBook returnBook = mock(ReturnBook.class);
-        when(returnBook.accessRestricted()).thenReturn(true);
+        when(returnBook.accessAvailable()).thenReturn(true);
         options.add(returnBook);
 
         menuItems = options.stream()

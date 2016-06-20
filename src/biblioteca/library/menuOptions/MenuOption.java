@@ -2,7 +2,7 @@ package biblioteca.library.menuOptions;
 
 public interface MenuOption {
 
-    boolean accessRestricted();
+    boolean accessAvailable();
 
     boolean run();
 

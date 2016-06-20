@@ -17,7 +17,7 @@ public class CheckoutMovie implements MenuOption {
         this.userAuthenticator = userAuthenticator;
     }
 
-    public boolean accessRestricted() {
+    public boolean accessAvailable() {
         return userAuthenticator.loggedIn();
     }
 

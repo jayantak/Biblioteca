@@ -15,7 +15,7 @@ public class LogIn implements MenuOption {
     }
 
     @Override
-    public boolean accessRestricted() {
+    public boolean accessAvailable() {
         return true;
     }
 

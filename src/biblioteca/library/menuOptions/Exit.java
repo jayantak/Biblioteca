@@ -8,7 +8,7 @@ public class Exit implements MenuOption {
         return false;
     }
 
-    public boolean accessRestricted() {
+    public boolean accessAvailable() {
         return true;
     }
 

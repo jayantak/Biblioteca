@@ -11,8 +11,8 @@ public class LogOut implements MenuOption {
     }
 
     @Override
-    public boolean accessRestricted() {
-        return false;
+    public boolean accessAvailable() {
+        return true;
     }
 
     @Override

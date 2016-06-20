@@ -23,7 +23,7 @@ public class Menu implements MenuOption {
         this.menuTitle = menuTitle;
     }
 
-    public boolean accessRestricted() {
+    public boolean accessAvailable() {
         return true;
     }
 
@@ -39,7 +39,7 @@ public class Menu implements MenuOption {
 
         while (restart) {
             List<String> menuItems = options.stream()
-                    .filter(MenuOption::accessRestricted)
+                    .filter(MenuOption::accessAvailable)
                     .map(Object::toString)
                     .collect(Collectors.toList());
             MenuOption menuOption = getCommand(menuItems);

@@ -19,7 +19,7 @@ public class ListMovies implements MenuOption {
         this.library = library;
     }
 
-    public boolean accessRestricted() {
+    public boolean accessAvailable() {
         return true;
     }
 

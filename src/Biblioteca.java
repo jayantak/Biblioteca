@@ -59,6 +59,7 @@ class Biblioteca {
         List<MenuOption> mainMenuOptions = new ArrayList<>();
         mainMenuOptions.add(new Exit());
         mainMenuOptions.add(new LogIn(userIO, userAuthenticator));
+        mainMenuOptions.add(new LogOut(userAuthenticator));
         mainMenuOptions.add(new ListBooks(userIO, library));
         mainMenuOptions.add(new ListMovies(userIO, library));
         mainMenuOptions.add(new CheckoutBook(userIO, library, userAuthenticator));
