@@ -1,5 +1,4 @@
 import biblioteca.io.*;
-import biblioteca.library.LendableList;
 import biblioteca.library.Library;
 import biblioteca.library.menuFunctions.MenuInput;
 import biblioteca.library.menuFunctions.Start;
@@ -22,10 +21,10 @@ class Biblioteca {
     }
 
     void start() throws FileNotFoundException {
-        Library library = createLibrary();
 
         UserIO userIO = createUserIO();
         UserAuthenticator userAuthenticator = createUserAuthenticator();
+        Library library = createLibrary(userAuthenticator);
 
         Menu menu = createMainMenu(userIO, library, userAuthenticator);
 
@@ -45,12 +44,12 @@ class Biblioteca {
         return new ConsoleIO(consoleInput);
     }
 
-    private Library createLibrary() throws FileNotFoundException {
+    private Library createLibrary(UserAuthenticator userAuthenticator) throws FileNotFoundException {
         String pathname = System.getProperty("user.dir") + libraryName + "libraryInventory.items";
         BufferedReader bookPropertiesReader = new BufferedReader(new FileReader(pathname));
         LibraryDataInput libraryDataInput = new LibraryTextFileItemsInput(bookPropertiesReader);
 
-        return new Library(libraryDataInput.getBookList(), new LendableList());
+        return new Library(libraryDataInput.getBookList(), userAuthenticator);
     }
 
     private Menu createMainMenu(UserIO userIO, Library library, UserAuthenticator userAuthenticator) {

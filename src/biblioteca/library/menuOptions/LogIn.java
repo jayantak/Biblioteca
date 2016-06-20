@@ -14,6 +14,7 @@ public class LogIn implements MenuOption {
         this.userAuthenticator = userAuthenticator;
     }
 
+    @Override
     public boolean accessRestricted() {
         return true;
     }

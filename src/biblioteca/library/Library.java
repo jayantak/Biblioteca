@@ -4,24 +4,25 @@ import biblioteca.library.lendableItems.Book;
 import biblioteca.library.lendableItems.Lendable;
 import biblioteca.library.lendableItems.Movie;
 import biblioteca.library.user.User;
+import biblioteca.library.user.UserAuthenticator;
 
 //Understands lending and returning of books
 public class Library {
 
     private LendableList inventory;
-    private LendableList checkedOut;
+    private UserAuthenticator userAuthenticator;
 
-    public Library(LendableList inventory, LendableList checkedOut) {
+    public Library(LendableList inventory, UserAuthenticator userAuthenticator) {
         this.inventory = inventory;
-        this.checkedOut = checkedOut;
+        this.userAuthenticator = userAuthenticator;
     }
 
     public void checkoutLendable(Lendable foundLendable, User user) {
-        inventory.move(checkedOut, foundLendable, user);
+        inventory.replace(foundLendable, User.NO_USER, user);
     }
 
     public Lendable getAvailableBookByName(String bookTitle) {
-        Lendable found = inventory.findByName(bookTitle);
+        Lendable found = inventory.findByName(bookTitle, User.NO_USER);
         if (found.getClass() != Book.class) {
             return Lendable.NO_LENDABLE;
         }
@@ -29,11 +30,11 @@ public class Library {
     }
 
     public void returnLendable(Lendable foundLendable, User user) {
-        checkedOut.move(inventory, foundLendable, user);
+        inventory.replace(foundLendable, user, User.NO_USER);
     }
 
     public Lendable getCheckedOutBookByName(String bookTitle) {
-        Lendable found = checkedOut.findByName(bookTitle);
+        Lendable found = inventory.findByName(bookTitle, userAuthenticator.getCurrentUser());
         if (found.getClass() != Book.class) {
             return Lendable.NO_LENDABLE;
         }
@@ -45,7 +46,7 @@ public class Library {
     }
 
     public Lendable getCheckedOutMovieByName(String title) {
-        Lendable found = checkedOut.findByName(title);
+        Lendable found = inventory.findByName(title, User.NO_USER);
         if (found.getClass() != Movie.class) {
             return Lendable.NO_LENDABLE;
         }
@@ -53,7 +54,7 @@ public class Library {
     }
 
     public Lendable getAvailableMovieByName(String bookTitle) {
-        Lendable found = inventory.findByName(bookTitle);
+        Lendable found = inventory.findByName(bookTitle, userAuthenticator.getCurrentUser());
         if (found.getClass() != Movie.class) {
             return Lendable.NO_LENDABLE;
         }

@@ -28,7 +28,7 @@ public class ReturnBook implements MenuOption {
         String bookTitle = userIO.inputLine();
         Lendable foundBook = library.getAvailableBookByName(bookTitle);
         if (foundBook != Lendable.NO_LENDABLE) {
-            userIO.display("That book has not been checked out!");
+            userIO.display("You have not checked out that book!");
             return true;
         }
         foundBook = library.getCheckedOutBookByName(bookTitle);

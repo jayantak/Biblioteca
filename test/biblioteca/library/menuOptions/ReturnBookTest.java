@@ -24,7 +24,7 @@ public class ReturnBookTest {
 
         returnBook.run();
 
-        verify(userIO).display("That book has not been checked out!");
+        verify(userIO).display("You have not checked out that book!");
     }
 
     @Test

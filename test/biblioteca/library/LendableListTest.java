@@ -18,7 +18,7 @@ public class LendableListTest {
         books.put(book, User.NO_USER);
         books.put(anotherBook, User.NO_USER);
 
-        assertEquals(book, books.findByName("Book Name"));
+        assertEquals(book, books.findByName("Book Name", User.NO_USER));
     }
 
     @Test
@@ -28,6 +28,6 @@ public class LendableListTest {
         Book book = new Book("Book Name", "Author Name", 1999);
         books.put(book, User.NO_USER);
 
-        assertEquals(Lendable.NO_LENDABLE, books.findByName("Another"));
+        assertEquals(Lendable.NO_LENDABLE, books.findByName("Another", User.NO_USER));
     }
 }

@@ -9,9 +9,9 @@ import java.util.Map;
 //Understands manipulation of a set of books
 public class LendableList extends HashMap<Lendable, User> {
 
-    Lendable findByName(String name) {
+    Lendable findByName(String name, User user) {
         for (Map.Entry<Lendable, User> lendable : this.entrySet()) {
-            if (lendable.getKey().hasSameName(name)) {
+            if (lendable.getKey().hasSameName(name) && lendable.getValue().equals(user)) {
                 return lendable.getKey();
             }
         }

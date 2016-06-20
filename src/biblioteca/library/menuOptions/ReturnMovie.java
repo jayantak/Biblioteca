@@ -27,7 +27,7 @@ public class ReturnMovie implements MenuOption {
         String bookTitle = userIO.inputLine();
         Lendable foundBook = library.getAvailableMovieByName(bookTitle);
         if (foundBook != Lendable.NO_LENDABLE) {
-            userIO.display("That movie has not been checked out!");
+            userIO.display("You have not checked out that movie!");
             return true;
         }
         foundBook = library.getCheckedOutMovieByName(bookTitle);

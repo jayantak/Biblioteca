@@ -27,4 +27,8 @@ public class UserAuthenticator {
     public boolean loggedIn() {
         return currentUser != User.NO_USER;
     }
+
+    public void logout() {
+        currentUser = User.NO_USER;
+    }
 }
