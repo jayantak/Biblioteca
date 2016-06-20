@@ -1,3 +1,5 @@
+package biblioteca;
+
 import biblioteca.io.*;
 import biblioteca.library.Library;
 import biblioteca.library.menuFunctions.MenuInput;
@@ -12,15 +14,15 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-class Biblioteca {
+public class Biblioteca {
 
     private String libraryName;
 
-    Biblioteca(String libraryName) {
+    public Biblioteca(String libraryName) {
         this.libraryName = libraryName;
     }
 
-    void start() throws FileNotFoundException {
+    public void start() throws FileNotFoundException {
 
         UserIO userIO = createUserIO();
         UserAuthenticator userAuthenticator = createUserAuthenticator();
@@ -56,7 +58,6 @@ class Biblioteca {
 
         MenuOption invalid = new PrintInvalid(userIO);
         MenuInput menuInput = new MenuInput(userIO);
-
 
         List<MenuOption> checkoutOptions = new ArrayList<>();
         checkoutOptions.add(new Exit());

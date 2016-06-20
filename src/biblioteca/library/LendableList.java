@@ -18,11 +18,6 @@ public class LendableList extends HashMap<Lendable, User> {
         return Lendable.NO_LENDABLE;
     }
 
-    void move(LendableList other, Lendable lendable, User user) {
-        this.remove(lendable);
-        other.put(lendable, user);
-    }
-
     @Override
     public String toString() {
         return super.toString();

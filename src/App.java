@@ -1,3 +1,5 @@
+import biblioteca.Biblioteca;
+
 import java.io.FileNotFoundException;
 
 public class App {
