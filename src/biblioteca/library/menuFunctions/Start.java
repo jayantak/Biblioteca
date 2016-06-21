@@ -13,6 +13,7 @@ public class Start {
     }
 
     public void print() {
-        userIO.display(welcomeMessage);
+        userIO.display("----------------------------------------------------------------------------" +
+                "----------------------------------------------------------------------------\n" + welcomeMessage);
     }
 }

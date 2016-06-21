@@ -23,6 +23,10 @@ public class CheckoutMovie implements MenuOption {
 
     @Override
     public boolean run() {
+        if (!userAuthenticator.loggedIn()) {
+            userIO.display("Log in to access member functionality");
+            return true;
+        }
         userIO.display("Enter title of movie to checkout: ");
         String title = userIO.inputLine();
         Lendable foundMovie = library.getCheckedOutMovieByName(title);

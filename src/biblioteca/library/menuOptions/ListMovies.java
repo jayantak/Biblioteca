@@ -25,6 +25,9 @@ public class ListMovies implements MenuOption {
 
     @Override
     public boolean run() {
+        userIO.display(String.format("%50s %30s %15s %15s", "Movie Name", "Director", "Year", "Rating"));
+        userIO.display("----------------------------------------------------------------------------" +
+                "----------------------------------------------------------------------------");
         LendableList toPrint = new LendableList();
         for (Map.Entry<Lendable, User> lendable : library.available().entrySet()) {
             if (lendable.getKey().getClass() != Movie.class) {
@@ -36,7 +39,7 @@ public class ListMovies implements MenuOption {
             toPrint.put(lendable.getKey(), User.NO_USER);
         }
 
-        userIO.printList(toPrint, "%50s %30s %15s %15s\n");
+        userIO.printList(toPrint, "%50s %30s %15s %15s");
         return true;
     }
 

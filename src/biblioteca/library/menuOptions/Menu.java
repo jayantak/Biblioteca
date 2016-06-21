@@ -37,16 +37,10 @@ public class Menu implements MenuOption {
 
     @Override
     public boolean run() {
-        start.print();
-        mainMenu();
-        return true;
-    }
-
-    private void mainMenu() {
         boolean restart = true;
 
         while (restart) {
-
+            start.print();
             List<MenuOption> validOptions = options.stream()
                     .filter(MenuOption::accessAvailable)
                     .collect(Collectors.toList());
@@ -58,6 +52,7 @@ public class Menu implements MenuOption {
             MenuOption menuOption = getCommand(menuItems, validOptions);
             restart = menuOption.run();
         }
+        return true;
     }
 
     private MenuOption getCommand(List<String> menuItems, List<MenuOption> validOptions) {

@@ -21,7 +21,6 @@ public class LogOut implements MenuOption {
         return true;
     }
 
-
     @Override
     public String toString() {
         return "Log Out";

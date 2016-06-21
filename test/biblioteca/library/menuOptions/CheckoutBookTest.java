@@ -49,12 +49,11 @@ public class CheckoutBookTest {
     }
 
     @Test
-    public void shouldDisplayMessageWhenBooDoesNotExist() {
+    public void shouldDisplayMessageWhenBookDoesNotExist() {
         UserIO userIO = mock(UserIO.class);
         Library library = mock(Library.class);
         UserAuthenticator userAuthenticator = mock(UserAuthenticator.class);
         CheckoutBook checkoutBook = new CheckoutBook(userIO, library, userAuthenticator);
-        Book book = mock(Book.class);
         when(userIO.inputLine()).thenReturn("Book");
         when(library.getCheckedOutBookByName("Book")).thenReturn(Lendable.NO_LENDABLE);
         when(library.getAvailableBookByName("Book")).thenReturn(Lendable.NO_LENDABLE);
@@ -63,5 +62,33 @@ public class CheckoutBookTest {
         checkoutBook.run();
 
         verify(userIO).display("Sorry that book does not exist!");
+    }
+
+    @Test
+    public void shouldDisplayMessageWhenUserIsNotLoggedIn() {
+        UserIO userIO = mock(UserIO.class);
+        Library library = mock(Library.class);
+        UserAuthenticator userAuthenticator = mock(UserAuthenticator.class);
+        CheckoutBook checkoutBook = new CheckoutBook(userIO, library, userAuthenticator);
+        when(userIO.inputLine()).thenReturn("Book");
+        when(library.getCheckedOutBookByName("Book")).thenReturn(Lendable.NO_LENDABLE);
+        when(library.getAvailableBookByName("Book")).thenReturn(Lendable.NO_LENDABLE);
+        when(userAuthenticator.loggedIn()).thenReturn(false);
+
+        checkoutBook.run();
+
+        verify(userIO).display("Log in to access member functionality");
+    }
+
+    @Test
+    public void shouldCheckUserAuthenticator() {
+        UserIO userIO = mock(UserIO.class);
+        Library library = mock(Library.class);
+        UserAuthenticator userAuthenticator = mock(UserAuthenticator.class);
+        CheckoutBook checkoutBook = new CheckoutBook(userIO, library, userAuthenticator);
+
+        checkoutBook.accessAvailable();
+
+        verify(userAuthenticator).loggedIn();
     }
 }

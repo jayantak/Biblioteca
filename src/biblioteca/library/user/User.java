@@ -23,11 +23,9 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", phone=" + phone +
-                '}';
+        return "Name\t=\t" + name +
+                "\nEmail\t=\t" + email +
+                "\nPhone\t=\t" + phone;
     }
 
     @Override

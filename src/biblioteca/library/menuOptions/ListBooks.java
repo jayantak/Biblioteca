@@ -26,6 +26,9 @@ public class ListBooks implements MenuOption {
 
     @Override
     public boolean run() {
+        userIO.display(String.format("%50s %30s %15s", "Book Name", "Author", "Year"));
+        userIO.display("----------------------------------------------------------------------------" +
+                "----------------------------------------------------------------------------");
         LendableList toPrint = new LendableList();
         for (Map.Entry<Lendable, User> lendable : library.available().entrySet()) {
             if (lendable.getKey().getClass() != Book.class) {
@@ -37,7 +40,7 @@ public class ListBooks implements MenuOption {
             toPrint.put(lendable.getKey(), User.NO_USER);
         }
 
-        userIO.printList(toPrint, "%50s %30s %15s\n");
+        userIO.printList(toPrint, "%50s %30s %15s");
         return true;
     }
 

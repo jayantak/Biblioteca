@@ -27,7 +27,8 @@ public class ConsoleIO implements UserIO {
 
     @Override
     public int menu(List<String> menuItems) {
-        System.out.println("" +
+        System.out.println("----------------------------------------------------------------------------" +
+                "----------------------------------------------------------------------------\n" +
                 "Choose option: ");
         int i = 0;
         for (String item : menuItems) {
@@ -39,6 +40,8 @@ public class ConsoleIO implements UserIO {
         } catch (Exception e) {
             System.out.println("Something went wrong with the input, try again");
         }
+        System.out.println("----------------------------------------------------------------------------" +
+                "----------------------------------------------------------------------------");
         return option;
     }
 

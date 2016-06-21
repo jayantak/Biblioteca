@@ -3,6 +3,7 @@ package biblioteca.library.lendableItems;
 public interface Lendable {
 
     Lendable NO_LENDABLE = new Lendable() {
+
         @Override
         public String toString(String format) {
             return "NO LENDABLE ITEM FOUND";

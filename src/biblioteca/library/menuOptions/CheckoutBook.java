@@ -5,7 +5,7 @@ import biblioteca.library.Library;
 import biblioteca.library.lendableItems.Lendable;
 import biblioteca.library.user.UserAuthenticator;
 
-//Understands how to checkoutLendable a book
+//Understands how to checkout a book
 public class CheckoutBook implements MenuOption {
 
     private UserIO userIO;
@@ -24,7 +24,7 @@ public class CheckoutBook implements MenuOption {
 
     @Override
     public boolean run() {
-        if(!userAuthenticator.loggedIn()) {
+        if (!userAuthenticator.loggedIn()) {
             userIO.display("Log in to access member functionality");
             return true;
         }

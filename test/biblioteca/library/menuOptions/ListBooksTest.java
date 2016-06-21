@@ -8,6 +8,7 @@ import biblioteca.library.lendableItems.Book;
 import biblioteca.library.user.User;
 import org.junit.Test;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.mockito.Mockito.*;
 
 public class ListBooksTest {
@@ -26,6 +27,19 @@ public class ListBooksTest {
 
         listBooks.run();
 
-        verify(userIO).printList(books, "%50s %30s %15s\n");
+        verify(userIO).printList(books, "%50s %30s %15s");
+    }
+
+    @Test
+    public void doesNotRequireLogin() {
+        UserIO userIO = mock(ConsoleIO.class);
+        Library library = mock(Library.class);
+        LendableList books = new LendableList();
+        Book book = new Book("", "", 0);
+        books.put(book, User.NO_USER);
+
+        ListBooks listBooks = new ListBooks(userIO, library);
+
+        assertTrue(listBooks.accessAvailable());
     }
 }

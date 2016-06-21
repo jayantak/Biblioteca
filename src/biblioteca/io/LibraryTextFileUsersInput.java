@@ -29,7 +29,7 @@ public class LibraryTextFileUsersInput {
         }
         for (String data : userListString) {
             String[] metaData = data.split(",");
-                users.add(new User(metaData[0], metaData[1], metaData[2], metaData[3], metaData[4]));
+            users.add(new User(metaData[0], metaData[1], metaData[2], metaData[3], metaData[4]));
         }
         return users;
     }

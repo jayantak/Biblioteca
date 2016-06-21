@@ -6,7 +6,7 @@ import biblioteca.library.user.User;
 import java.util.HashMap;
 import java.util.Map;
 
-//Understands manipulation of a set of books
+//Understands manipulation of a set of lendable items that can be lent
 public class LendableList extends HashMap<Lendable, User> {
 
     Lendable findByName(String name, User user) {

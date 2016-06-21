@@ -26,6 +26,6 @@ public class ListMoviesTest {
 
         listMovies.run();
 
-        verify(userIO).printList(items, "%50s %30s %15s %15s\n");
+        verify(userIO).printList(items, "%50s %30s %15s %15s");
     }
 }
