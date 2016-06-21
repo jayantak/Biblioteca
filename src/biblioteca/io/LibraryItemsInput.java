@@ -4,7 +4,7 @@ import biblioteca.library.LendableList;
 
 import java.io.FileNotFoundException;
 
-public interface LibraryDataInput {
+public interface LibraryItemsInput {
 
-    LendableList getBookList() throws FileNotFoundException;
+    LendableList getItemList() throws FileNotFoundException;
 }

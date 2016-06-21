@@ -35,7 +35,7 @@ public class Biblioteca {
     }
 
     private UserAuthenticator createUserAuthenticator() throws FileNotFoundException {
-        String pathname = System.getProperty("user.dir") + libraryName + "libraryMembers.users";
+        String pathname = System.getProperty("user.dir") + libraryName + "libraryMembers";
         BufferedReader userDataReader = new BufferedReader(new FileReader(pathname));
         LibraryTextFileUsersInput libraryTextFileUsersInput = new LibraryTextFileUsersInput(userDataReader);
         return new UserAuthenticator(libraryTextFileUsersInput.getUserList());
@@ -48,11 +48,11 @@ public class Biblioteca {
     }
 
     private Library createLibrary(UserAuthenticator userAuthenticator) throws FileNotFoundException {
-        String pathname = System.getProperty("user.dir") + libraryName + "libraryInventory.items";
+        String pathname = System.getProperty("user.dir") + libraryName + "libraryInventory";
         BufferedReader bookPropertiesReader = new BufferedReader(new FileReader(pathname));
-        LibraryDataInput libraryDataInput = new LibraryTextFileItemsInput(bookPropertiesReader);
+        LibraryItemsInput libraryItemsInput = new LibraryTextFileItemsInput(bookPropertiesReader);
 
-        return new Library(libraryDataInput.getBookList(), userAuthenticator);
+        return new Library(libraryItemsInput.getItemList(), userAuthenticator);
     }
 
     private Menu createMainMenu(UserIO userIO, Library library, UserAuthenticator userAuthenticator) {
@@ -64,13 +64,15 @@ public class Biblioteca {
         checkoutOptions.add(new Exit());
         checkoutOptions.add(new CheckoutBook(userIO, library, userAuthenticator));
         checkoutOptions.add(new CheckoutMovie(userIO, library, userAuthenticator));
-        Menu checkoutMenu = new Menu(new Start(userIO, "Checkout Item"), menuInput, checkoutOptions, invalid, "Checkout Item", true, userAuthenticator);
+        Start checkoutStart = new Start(userIO, "Checkout Item");
+        Menu checkoutMenu = new Menu(checkoutStart, menuInput, checkoutOptions, invalid, "Checkout Item", true, userAuthenticator);
 
         List<MenuOption> returnOptions = new ArrayList<>();
         returnOptions.add(new Exit());
         returnOptions.add(new ReturnBook(userIO, library, userAuthenticator));
         returnOptions.add(new ReturnMovie(userIO, library, userAuthenticator));
-        Menu returnMenu = new Menu(new Start(userIO, "Return Item"), menuInput, returnOptions, invalid, "Return Item", true, userAuthenticator);
+        Start returnStart = new Start(userIO, "Return Item");
+        Menu returnMenu = new Menu(returnStart, menuInput, returnOptions, invalid, "Return Item", true, userAuthenticator);
 
         List<MenuOption> mainMenuOptions = new ArrayList<>();
         mainMenuOptions.add(new Exit());
@@ -82,6 +84,7 @@ public class Biblioteca {
         mainMenuOptions.add(checkoutMenu);
         mainMenuOptions.add(returnMenu);
 
-        return new Menu(new Start(userIO, "Main Menu"), menuInput, mainMenuOptions, invalid, "Main Menu", false, userAuthenticator);
+        Start mainMenuStart = new Start(userIO, "Main Menu");
+        return new Menu(mainMenuStart, menuInput, mainMenuOptions, invalid, "Main Menu", false, userAuthenticator);
     }
 }

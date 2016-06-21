@@ -12,7 +12,7 @@ import java.util.List;
 import static biblioteca.library.user.User.NO_USER;
 
 //Understands input of books from file
-public class LibraryTextFileItemsInput implements LibraryDataInput {
+public class LibraryTextFileItemsInput implements LibraryItemsInput {
 
     private BufferedReader bufferedReader;
 
@@ -20,7 +20,7 @@ public class LibraryTextFileItemsInput implements LibraryDataInput {
         this.bufferedReader = bufferedReader;
     }
 
-    public LendableList getBookList() {
+    public LendableList getItemList() {
         LendableList lendableList = new LendableList();
         List<String> lendableListStrings = new ArrayList<>();
         String readLine;

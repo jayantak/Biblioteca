@@ -2,6 +2,7 @@ package biblioteca.io;
 
 import biblioteca.library.LendableList;
 import biblioteca.library.lendableItems.Book;
+import biblioteca.library.lendableItems.Movie;
 import biblioteca.library.user.User;
 import org.junit.Test;
 
@@ -17,11 +18,22 @@ public class LibraryTextFileItemsInputTest {
     @Test
     public void scanOfInputBookFileShouldConstructBookList() throws IOException {
         BufferedReader fileInput = mock(BufferedReader.class);
-        LibraryDataInput libraryDataInput = new LibraryTextFileItemsInput(fileInput);
+        LibraryItemsInput libraryItemsInput = new LibraryTextFileItemsInput(fileInput);
         when(fileInput.readLine()).thenReturn("The Book Thief,Marcus Zusak,2006").thenReturn(null);
 
         LendableList books = new LendableList();
         books.put(new Book("The Book Thief", "Marcus Zusak", 2006), User.NO_USER);
-        assertEquals(books.get(0), libraryDataInput.getBookList().get(0));
+        assertEquals(books.get(0), libraryItemsInput.getItemList().get(0));
+    }
+
+    @Test
+    public void scanOfInputMovieFileShouldConstructMovieList() throws IOException {
+        BufferedReader fileInput = mock(BufferedReader.class);
+        LibraryItemsInput libraryItemsInput = new LibraryTextFileItemsInput(fileInput);
+        when(fileInput.readLine()).thenReturn("The Book Thief,Marcus Zusak,2006,5").thenReturn(null);
+
+        LendableList items = new LendableList();
+        items.put(new Movie("The Book Thief", "Marcus Zusak", 2006, 5), User.NO_USER);
+        assertEquals(items.get(0), libraryItemsInput.getItemList().get(0));
     }
 }
