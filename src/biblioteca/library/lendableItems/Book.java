@@ -1,11 +1,12 @@
-package biblioteca.library;
+package biblioteca.library.lendableItems;
 
 //Understands the properties of a written novel
-public class Book {
+public class Book implements Lendable {
 
-    final String name;
-    final String author;
-    final int yearPublished;
+    public static final Book NO_BOOK = new Book("", "", 0);
+    private final String name;
+    private final String author;
+    private final int yearPublished;
 
     public Book(String name, String author, int yearPublished) {
         this.name = name;
@@ -27,8 +28,8 @@ public class Book {
         if (yearPublished != book.yearPublished) return false;
         if (name != null ? !name.equals(book.name) : book.name != null) return false;
         return author != null ? author.equals(book.author) : book.author == null;
-
     }
+
 
     @Override
     public String toString() {
@@ -37,5 +38,10 @@ public class Book {
                 ", author='" + author + '\'' +
                 ", yearPublished=" + yearPublished +
                 '}';
+    }
+
+    @Override
+    public boolean hasSameName(String otherName) {
+        return this.name.equals(otherName);
     }
 }

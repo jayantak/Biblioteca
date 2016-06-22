@@ -1,47 +1,49 @@
 package biblioteca.library;
 
+import biblioteca.library.lendableItems.Book;
+import biblioteca.library.user.UserAuthenticator;
+import org.junit.Before;
 import org.junit.Test;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static biblioteca.library.user.User.NO_USER;
+import static org.mockito.Mockito.*;
 
 public class LibraryTest {
 
-    @Test
-    public void availableBookShouldBeFoundByName() {
-        BookList available = mock(BookList.class);
-        BookList checkedOut = mock(BookList.class);
-        Library library = new Library(available, checkedOut);
-        library.getAvailableBookByName("Book Name");
-        verify(available).findBookByName("Book Name");
+    private UserAuthenticator userAuthenticator;
+
+    @Before
+    public void setUp() throws Exception {
+        userAuthenticator = mock(UserAuthenticator.class);
     }
 
     @Test
-    public void checkedOutBookShouldBeFoundByName() {
-        BookList available = mock(BookList.class);
-        BookList checkedOut = mock(BookList.class);
-        Library library = new Library(available, checkedOut);
-        library.getCheckedOutBookByName("Book Name");
-        verify(checkedOut).findBookByName("Book Name");
+    public void availableBookShouldBeFoundByName() {
+        LendableList available = mock(LendableList.class);
+        LendableList checkedOut = mock(LendableList.class);
+        Library library = new Library(available, userAuthenticator);
+        when(available.findByName("Book Name", NO_USER)).thenReturn(mock(Book.class));
+        library.getAvailableBookByName("Book Name");
+        verify(available).findByName("Book Name", NO_USER);
     }
 
     @Test
     public void checkoutBookShouldMoveBookFromCheckedOutToAvailable() {
-        BookList available = mock(BookList.class);
-        BookList checkedOut = mock(BookList.class);
-        Library library = new Library(available, checkedOut);
+        LendableList available = mock(LendableList.class);
+        LendableList checkedOut = mock(LendableList.class);
+        Library library = new Library(available, userAuthenticator);
         Book book = mock(Book.class);
-        library.checkoutBook(book);
-        verify(available).move(checkedOut, book);
+        library.checkoutLendable(book, NO_USER);
+        verify(available).replace(book, NO_USER, NO_USER);
     }
 
     @Test
     public void returnBookShouldMoveBookFromCheckedOutToAvailable() {
-        BookList available = mock(BookList.class);
-        BookList checkedOut = mock(BookList.class);
-        Library library = new Library(available, checkedOut);
+        LendableList available = mock(LendableList.class);
+        LendableList checkedOut = mock(LendableList.class);
+        Library library = new Library(available, userAuthenticator);
         Book book = mock(Book.class);
-        library.returnBook(book);
-        verify(checkedOut).move(available, book);
+        library.returnLendable(book, NO_USER);
+        verify(available).replace(book, NO_USER, NO_USER);
     }
 }

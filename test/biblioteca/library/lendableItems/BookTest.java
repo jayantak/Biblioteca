@@ -1,4 +1,4 @@
-package biblioteca.library;
+package biblioteca.library.lendableItems;
 
 import org.junit.Test;
 

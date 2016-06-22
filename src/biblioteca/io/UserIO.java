@@ -1,6 +1,6 @@
 package biblioteca.io;
 
-import biblioteca.library.BookList;
+import biblioteca.library.LendableList;
 
 import java.util.List;
 
@@ -8,11 +8,13 @@ public interface UserIO {
 
     void display(String s);
 
-    void printBookList(BookList bookList, String format);
+    void printList(LendableList lendableList, String format);
 
-    int mainMenu(List<String> menuItems);
+    int menu(List<String> menuItems);
 
     void invalidOption();
 
-    String inputBookTitle();
+    String inputLine();
+
+    void clear();
 }

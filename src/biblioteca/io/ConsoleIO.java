@@ -1,10 +1,8 @@
 package biblioteca.io;
 
-import biblioteca.library.Book;
-import biblioteca.library.BookList;
+import biblioteca.library.LendableList;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -23,28 +21,27 @@ public class ConsoleIO implements UserIO {
     }
 
     @Override
-    public void printBookList(BookList bookList, String format) {
-        System.out.println("\nAvailable books : ");
-        System.out.println(String.format(format, "Book Name", "Author", "Year of Publication"));
-        for (Book book : bookList) {
-            System.out.println(book.toString("%30s %30s %30s\n"));
-        }
+    public void printList(LendableList lendableList, String format) {
+        lendableList.forEach((lendable, user) -> System.out.println(lendable.toString(format)));
     }
 
     @Override
-    public int mainMenu(List<String> menuItems) {
-        System.out.println("" +
+    public int menu(List<String> menuItems) {
+        System.out.println("----------------------------------------------------------------------------" +
+                "----------------------------------------------------------------------------\n" +
                 "Choose option: ");
         int i = 0;
         for (String item : menuItems) {
-            System.out.println("\n" + i++ + ". " + item);
+            System.out.println("" + i++ + ". " + item);
         }
         int option = -1;
         try {
             option = Integer.parseInt(bufferedReader.readLine());
-        } catch (IOException e) {
-            System.out.println("Something went wrong with the input");
+        } catch (Exception e) {
+            System.out.println("Something went wrong with the input, try again");
         }
+        System.out.println("----------------------------------------------------------------------------" +
+                "----------------------------------------------------------------------------");
         return option;
     }
 
@@ -54,8 +51,13 @@ public class ConsoleIO implements UserIO {
     }
 
     @Override
-    public String inputBookTitle() {
+    public String inputLine() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
+    }
+
+    @Override
+    public void clear() {
+        System.out.flush();
     }
 }
